@@ -20,6 +20,5 @@ export default {
   dark_yellow: '#F3920B',
   light_yellow: '#E4B644',
   light_gray: '#DDE0DE',
-  food_light_black: '#757876',
-  food_light_black2: '#454846',
+  light_black2: '#757876',
 };
