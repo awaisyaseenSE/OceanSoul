@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import React from 'react';
+import HomeScreen from './app/screens/HomeScreen';
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <View style={styles.mainContainer}>
         <Text style={styles.heading}>Welcome,</Text>
         <Text style={styles.subheading}>Ocean Soul</Text>
+        <HomeScreen />
       </View>
     </SafeAreaView>
   );
