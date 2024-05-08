@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "687399095697",
+    "project_id": "oceansoul-cf4e6",
+    "storage_bucket": "oceansoul-cf4e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687399095697:android:ca54dc2f0503debcad9e30",
+        "android_client_info": {
+          "package_name": "com.oceansoul"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUXgyyub0m47FDPkGmL2tZ4tmznqM1wKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
