@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import React from 'react';
 import HomeScreen from './app/screens/HomeScreen';
+import fontFamily from './app/styles/fontFamily';
 
 export default function App() {
   return (
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 20,
     color: 'black',
-    fontWeight: '900',
+    fontFamily: fontFamily.extra_bold,
   },
   subheading: {
     fontSize: 16,
