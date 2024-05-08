@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import React from 'react';
 
@@ -15,7 +16,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F6A03C',
+    // backgroundColor: '#F6A03C',
   },
   mainContainer: {
     flex: 1,
