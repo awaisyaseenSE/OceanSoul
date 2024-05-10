@@ -6,6 +6,7 @@ import {
   StatusBar,
 } from 'react-native';
 import React from 'react';
+import colors from '../styles/colors';
 
 export default function ScreenComponent({
   style,
@@ -29,5 +30,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     paddingVertical: Platform.OS === 'android' ? 5 : 0,
+    backgroundColor: colors.white,
   },
 });
