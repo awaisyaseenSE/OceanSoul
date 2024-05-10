@@ -1,10 +1,6 @@
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import React from 'react';
 
 export default function HomeScreen() {
-  return (
-    <View style={{marginTop: 20}}>
-      <Text>HomeScreen</Text>
-    </View>
-  );
+  return <View style={{}}></View>;
 }

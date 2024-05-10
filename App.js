@@ -3,27 +3,23 @@ import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import React from 'react';
 import HomeScreen from './app/screens/HomeScreen';
 import fontFamily from './app/styles/fontFamily';
+import SplashScreen from './app/screens/SplashScreen';
+import OnBoardingScreen from './app/screens/OnBoardingScreen';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.mainContainer}>
-        <Text style={styles.heading}>Welcome,</Text>
-        <Text style={styles.subheading}>Ocean Soul</Text>
-        <HomeScreen />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      {/* <Text style={styles.heading}>Welcome,</Text>
+        <Text style={styles.subheading}>Ocean Soul</Text> */}
+      <SplashScreen />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E6E0F2',
-  },
-  mainContainer: {
-    flex: 1,
-    paddingHorizontal: 20,
+    backgroundColor: '#FFFFFF',
   },
   heading: {
     fontSize: 20,

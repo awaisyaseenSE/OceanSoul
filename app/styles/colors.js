@@ -1,6 +1,7 @@
 export default {
   white: '#FFFFFF',
   black: '#000000',
+  black_light: '#17223B',
   red: '#F83758',
   red_dark: '#EB3030',
   red_light: '#FA7189',
