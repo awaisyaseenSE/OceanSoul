@@ -3,15 +3,16 @@ export const homeBannerData = [
     id: 0,
     title: '30-40% OFF',
     desc: `Now in (product)${'\n'}All colours`,
-    img: 'https://img.freepik.com/free-photo/front-view-young-man-checking-his-phone_23-2148316180.jpg?t=st=1715578189~exp=1715581789~hmac=31921999afcdd621a8bb8803242f695a3a2672c7f8d803cb28e3253175ff6f61&w=1800',
-    left: true,
+    img: 'https://img.freepik.com/free-photo/pretty-young-stylish-sexy-woman-pink-luxury-dress-summer-fashion-trend-chic-style-sunglasses-blue-studio-background-shopping-holding-paper-bags-talking-mobile-phone-shopaholic_285396-2957.jpg',
+
+    left: false,
   },
   {
     id: 1,
     title: '50-60% OFF',
     desc: `Now in (product)${'\n'}All colours`,
-    img: 'https://img.freepik.com/free-photo/pretty-young-stylish-sexy-woman-pink-luxury-dress-summer-fashion-trend-chic-style-sunglasses-blue-studio-background-shopping-holding-paper-bags-talking-mobile-phone-shopaholic_285396-2957.jpg',
-    left: false,
+    img: 'https://img.freepik.com/free-photo/front-view-young-man-checking-his-phone_23-2148316180.jpg?t=st=1715578189~exp=1715581789~hmac=31921999afcdd621a8bb8803242f695a3a2672c7f8d803cb28e3253175ff6f61&w=1800',
+    left: true,
   },
   {
     id: 2,

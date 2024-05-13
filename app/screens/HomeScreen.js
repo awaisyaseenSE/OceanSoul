@@ -20,6 +20,8 @@ import HomeBannerCompo from '../components/HomeBannerCompo';
 import DayOfTheDealCompo from '../components/DayOfTheDealCompo';
 import ShowAllProductsCompo from '../components/ShowAllProductsCompo';
 import SpecialOfferCompo from '../components/SpecialOfferCompo';
+import HeelCompo from '../components/HeelCompo';
+import TredingProductsBannerCompo from '../components/TredingProductsBannerCompo';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -61,6 +63,19 @@ export default function HomeScreen() {
             <DayOfTheDealCompo />
             <ShowAllProductsCompo />
             <SpecialOfferCompo />
+            <HeelCompo />
+            <TredingProductsBannerCompo />
+            <FastImage
+              source={require('../assets/hot-summer-banner.png')}
+              style={{
+                width: screenWidth - 40,
+                height: screenHeight / 4,
+                borderRadius: 6,
+                alignSelf: 'center',
+                marginVertical: 4,
+              }}
+              resizeMode="contain"
+            />
             <View style={{marginVertical: 12}} />
           </View>
         </ScrollView>

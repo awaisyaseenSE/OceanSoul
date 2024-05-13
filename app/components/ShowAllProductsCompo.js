@@ -8,7 +8,7 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import colors from '../styles/colors';
 import FastImage from 'react-native-fast-image';
 import {height} from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
@@ -23,7 +23,7 @@ const ShowAllProductsCompo = () => {
 
   const getAllProducts = async () => {
     try {
-      let url = 'https://fakestoreapi.com/products?limit=5';
+      let url = 'https://fakestoreapi.com/products?limit=0';
       setLoading(true);
       let response = await fetch(url);
 
@@ -35,7 +35,7 @@ const ShowAllProductsCompo = () => {
       let responseData = await response.json();
       if (responseData?.length > 0 && !!responseData) {
         // console.log(responseData?.length);
-        setAllProducts(responseData);
+        setAllProducts(responseData.reverse());
       }
       setLoading(false);
     } catch (error) {
@@ -120,6 +120,13 @@ const ShowAllProductsCompo = () => {
     );
   };
 
+  const flatListRef = useRef(null);
+  const scrollToEnd = () => {
+    if (flatListRef?.current) {
+      flatListRef?.current?.scrollToEnd({animated: true});
+    }
+  };
+
   return (
     <>
       {loading && (
@@ -130,14 +137,19 @@ const ShowAllProductsCompo = () => {
       {allProducts.length > 0 && (
         <View>
           <FlatList
+            ref={flatListRef}
             data={allProducts}
             renderItem={renderItem}
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => index.toString()}
             horizontal
             ListFooterComponent={<View style={{marginHorizontal: 10}} />}
+            scroll
           />
-          <TouchableOpacity style={styles.nextBtnContainer} activeOpacity={0.8}>
+          <TouchableOpacity
+            style={styles.nextBtnContainer}
+            activeOpacity={0.8}
+            onPress={scrollToEnd}>
             <Image
               source={require('../assets/next-btn.png')}
               style={styles.nextBtn}

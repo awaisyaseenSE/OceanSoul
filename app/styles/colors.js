@@ -15,4 +15,5 @@ export default {
   yellow_dark: '#EDB40E',
   pink: '#FFA3B3',
   gray2: '#DEDBDB',
+  grayBg: '#F8F8F9',
 };
