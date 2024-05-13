@@ -137,6 +137,12 @@ const ShowAllProductsCompo = () => {
             horizontal
             ListFooterComponent={<View style={{marginHorizontal: 10}} />}
           />
+          <TouchableOpacity style={styles.nextBtnContainer} activeOpacity={0.8}>
+            <Image
+              source={require('../assets/next-btn.png')}
+              style={styles.nextBtn}
+            />
+          </TouchableOpacity>
         </View>
       )}
     </>
@@ -199,6 +205,20 @@ const styles = StyleSheet.create({
     marginTop: 4,
     overflow: 'hidden',
     marginBottom: 4,
+  },
+  nextBtn: {
+    width: 36,
+    height: 36,
+  },
+  nextBtnContainer: {
+    position: 'absolute',
+    right: 0,
+    top: screenHeight / 5,
+    left: screenWidth - 44,
+    backgroundColor: '#C9C9C9',
+    width: 36,
+    height: 36,
+    borderRadius: 36 / 2,
   },
 });
 
