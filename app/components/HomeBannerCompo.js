@@ -19,7 +19,6 @@ const screenHeight = Dimensions.get('window').height;
 const HomeBannerCompo = () => {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(1);
   const renderItem = ({item, index}) => {
-    console.log(item.left);
     return (
       <View style={styles.mainContainer}>
         <FastImage source={{uri: item?.img}} style={styles.image} />

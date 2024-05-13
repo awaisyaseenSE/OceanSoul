@@ -1,5 +1,14 @@
-import {View, Text, Image, StyleSheet, Alert, Dimensions} from 'react-native';
-import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Alert,
+  Dimensions,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
 import TopHomeScreenCompo from '../components/TopHomeScreenCompo';
@@ -9,43 +18,54 @@ import ProductCategoryCompo from '../components/ProductCategoryCompo';
 import FastImage from 'react-native-fast-image';
 import HomeBannerCompo from '../components/HomeBannerCompo';
 import DayOfTheDealCompo from '../components/DayOfTheDealCompo';
+import ShowAllProductsCompo from '../components/ShowAllProductsCompo';
+import SpecialOfferCompo from '../components/SpecialOfferCompo';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 export default function HomeScreen() {
   const [searchText, setSearchText] = useState('');
+  const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
+
   return (
-    <ScreenComponent style={{backgroundColor: colors.white_light2}}>
-      <TopHomeScreenCompo />
-      <View style={styles.container}>
-        <View style={{paddingHorizontal: 20}}>
-          <TextInputWithLeftIconCompo
-            value={searchText}
-            onChangeText={text => {
-              if (text.trim().length) {
-                setSearchText(text);
-              } else {
-                setSearchText('');
-              }
-            }}
-            maxLength={40}
-            inputStyle={styles.inputStyle}
-            clearIcon={searchText.length > 0 ? 'Clear' : ''}
-            onPressClear={() => setSearchText('')}
-            placeholder="Search any Product.."
-            placeholderTextColor={colors.gray}
-            leftIcon={require('../assets/search.png')}
-            leftIconStyle={styles.inputLeftIcon}
-          />
-          <HomeFilterCompo />
-        </View>
-        <ProductCategoryCompo setSelectedCategory={setSelectedCategory} />
-        <HomeBannerCompo />
-        <DayOfTheDealCompo />
-      </View>
-    </ScreenComponent>
+    <>
+      <ScreenComponent style={{backgroundColor: colors.white_light2}}>
+        <TopHomeScreenCompo />
+        <ScrollView showsVerticalScrollIndicator={false} style={{flex: 1}}>
+          <View style={styles.container}>
+            <View style={{paddingHorizontal: 20}}>
+              <TextInputWithLeftIconCompo
+                value={searchText}
+                onChangeText={text => {
+                  if (text.trim().length) {
+                    setSearchText(text);
+                  } else {
+                    setSearchText('');
+                  }
+                }}
+                maxLength={40}
+                inputStyle={styles.inputStyle}
+                clearIcon={searchText.length > 0 ? 'Clear' : ''}
+                onPressClear={() => setSearchText('')}
+                placeholder="Search any Product.."
+                placeholderTextColor={colors.gray}
+                leftIcon={require('../assets/search.png')}
+                leftIconStyle={styles.inputLeftIcon}
+              />
+              <HomeFilterCompo />
+            </View>
+            <ProductCategoryCompo setSelectedCategory={setSelectedCategory} />
+            <HomeBannerCompo />
+            <DayOfTheDealCompo />
+            <ShowAllProductsCompo />
+            <SpecialOfferCompo />
+            <View style={{marginVertical: 12}} />
+          </View>
+        </ScrollView>
+      </ScreenComponent>
+    </>
   );
 }
 

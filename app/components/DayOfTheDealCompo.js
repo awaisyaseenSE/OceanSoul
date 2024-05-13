@@ -6,7 +6,14 @@ import fontFamily from '../styles/fontFamily';
 const DayOfTheDealCompo = () => {
   const [remainingTime, setRemainingTime] = useState(calculateRemainingTime());
   function calculateRemainingTime() {
-    const targetTime = new Date('2024-05-14T22:55:20').getTime(); // Set your target end time here
+    // const targetTime = new Date('2024-05-14T22:55:20').getTime()
+    let targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 1); // Setting target date to tomorrow
+    targetDate.setHours(22);
+    targetDate.setMinutes(55);
+    targetDate.setSeconds(20);
+
+    const targetTime = targetDate.getTime();
     const currentTime = new Date().getTime();
     const timeDifference = targetTime - currentTime;
 
