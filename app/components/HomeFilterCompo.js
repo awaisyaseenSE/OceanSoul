@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     backgroundColor: '#EFEFEF',
     paddingHorizontal: 10,
-    paddingVertical: 6,
+    paddingVertical: 4,
     borderRadius: 6,
     shadowColor: colors.gray_dark,
     shadowOffset: {
