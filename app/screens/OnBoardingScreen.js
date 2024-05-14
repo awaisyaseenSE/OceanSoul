@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  Alert,
   FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -12,8 +11,11 @@ import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
 import Animated, {FadeInDown} from 'react-native-reanimated';
+import {useNavigation} from '@react-navigation/native';
+import navigationStrings from '../navigation/navigationStrings';
 
 export default function OnBoardingScreen() {
+  const navigation = useNavigation();
   const [selectedOnBoarding, setSelectedOnBoarding] = useState(1);
   const onBoardingData = [
     {
@@ -42,7 +44,7 @@ export default function OnBoardingScreen() {
     } else if (selectedOnBoarding == 2) {
       setSelectedOnBoarding(3);
     } else if (selectedOnBoarding == 3) {
-      Alert.alert('Complete!');
+      navigation.navigate(navigationStrings.BottomTabNavigator);
     } else {
       setSelectedOnBoarding(1);
     }
@@ -200,13 +202,19 @@ const styles = StyleSheet.create({
 });
 
 const OnBoardingTopCompo = ({selectedOnBoarding, setSelectedOnBoarding}) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.row}>
       <Text style={styles.text}>
         {selectedOnBoarding}
         <Text style={{color: colors.gray}}>/3</Text>
       </Text>
-      <Text style={styles.text}>Skip</Text>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate(navigationStrings.BottomTabNavigator)
+        }>
+        <Text style={styles.text}>Skip</Text>
+      </TouchableOpacity>
     </View>
   );
 };

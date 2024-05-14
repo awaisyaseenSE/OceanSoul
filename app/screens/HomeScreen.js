@@ -1,34 +1,25 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Alert,
-  Dimensions,
-  ActivityIndicator,
-  ScrollView,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, Dimensions, ScrollView} from 'react-native';
+import React, {useState} from 'react';
 import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
 import TopHomeScreenCompo from '../components/TopHomeScreenCompo';
 import TextInputWithLeftIconCompo from '../components/TextInputWithLeftIconCompo';
 import HomeFilterCompo from '../components/HomeFilterCompo';
 import ProductCategoryCompo from '../components/ProductCategoryCompo';
-import FastImage from 'react-native-fast-image';
 import HomeBannerCompo from '../components/HomeBannerCompo';
 import DayOfTheDealCompo from '../components/DayOfTheDealCompo';
 import ShowAllProductsCompo from '../components/ShowAllProductsCompo';
 import SpecialOfferCompo from '../components/SpecialOfferCompo';
 import HeelCompo from '../components/HeelCompo';
 import TredingProductsBannerCompo from '../components/TredingProductsBannerCompo';
+import HotSummerSaleCompo from '../components/HotSummerSaleCompo';
+import SponseredCompo from '../components/SponseredCompo';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 export default function HomeScreen() {
   const [searchText, setSearchText] = useState('');
-  const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
 
   return (
@@ -65,18 +56,9 @@ export default function HomeScreen() {
             <SpecialOfferCompo />
             <HeelCompo />
             <TredingProductsBannerCompo />
-            <FastImage
-              source={require('../assets/hot-summer-banner.png')}
-              style={{
-                width: screenWidth - 40,
-                height: screenHeight / 4,
-                borderRadius: 6,
-                alignSelf: 'center',
-                marginVertical: 4,
-              }}
-              resizeMode="contain"
-            />
-            <View style={{marginVertical: 12}} />
+            <HotSummerSaleCompo />
+            <SponseredCompo />
+            <View style={{marginVertical: 32}} />
           </View>
         </ScrollView>
       </ScreenComponent>
