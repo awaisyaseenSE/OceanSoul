@@ -11,8 +11,9 @@ import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
 import Animated, {FadeInDown} from 'react-native-reanimated';
-import {useNavigation} from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import navigationStrings from '../navigation/navigationStrings';
+import {storeValue} from '../helper/storeAndGetAsyncStorageValue';
 
 export default function OnBoardingScreen() {
   const navigation = useNavigation();
@@ -44,7 +45,7 @@ export default function OnBoardingScreen() {
     } else if (selectedOnBoarding == 2) {
       setSelectedOnBoarding(3);
     } else if (selectedOnBoarding == 3) {
-      navigation.navigate(navigationStrings.BottomTabNavigator);
+      handleFinishOnBoarding();
     } else {
       setSelectedOnBoarding(1);
     }
@@ -56,6 +57,17 @@ export default function OnBoardingScreen() {
       setSelectedOnBoarding(2);
     } else {
       setSelectedOnBoarding(1);
+    }
+  };
+
+  const handleFinishOnBoarding = async () => {
+    try {
+      console.log('Finish on boarding func is called!');
+      let key = 'onBoarding';
+      await storeValue(key, 'true');
+      navigation.dispatch(StackActions.replace('BottomTabNavigator'));
+    } catch (error) {
+      console.log('Error in finish on boarding screen function: ', error);
     }
   };
 
@@ -82,7 +94,7 @@ export default function OnBoardingScreen() {
       <View style={styles.container}>
         <OnBoardingTopCompo
           selectedOnBoarding={selectedOnBoarding}
-          setSelectedOnBoarding={setSelectedOnBoarding}
+          handleFinishOnBoarding={handleFinishOnBoarding}
         />
         <View style={styles.contentContainer}>
           <Animated.View
@@ -201,18 +213,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const OnBoardingTopCompo = ({selectedOnBoarding, setSelectedOnBoarding}) => {
-  const navigation = useNavigation();
+const OnBoardingTopCompo = ({selectedOnBoarding, handleFinishOnBoarding}) => {
   return (
     <View style={styles.row}>
       <Text style={styles.text}>
         {selectedOnBoarding}
         <Text style={{color: colors.gray}}>/3</Text>
       </Text>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate(navigationStrings.BottomTabNavigator)
-        }>
+      <TouchableOpacity onPress={handleFinishOnBoarding}>
         <Text style={styles.text}>Skip</Text>
       </TouchableOpacity>
     </View>

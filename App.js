@@ -1,18 +1,31 @@
 import 'react-native-gesture-handler';
-import {View, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import AppNavigator from './app/navigation/AppNavigator';
+import SplashScreen from './app/screens/SplashScreen';
+import {getValue} from './app/helper/storeAndGetAsyncStorageValue';
+import constants from './app/constants/constants';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <AppNavigator />
-    </View>
-  );
-}
+  const [splashDone, setSplashDone] = useState(false);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+  useEffect(() => {
+    checkOnBoarding();
+    setTimeout(() => {
+      setSplashDone(true);
+    }, 2000);
+  }, []);
+
+  const checkOnBoarding = async () => {
+    try {
+      let key = 'onBoarding';
+      const val = await getValue(key);
+      if (val === 'true') {
+        constants.onBoardingStatus = true;
+      }
+    } catch (error) {
+      console.log('Error in getting onBoarding status in app.js: ', error);
+    }
+  };
+
+  return <>{splashDone ? <AppNavigator /> : <SplashScreen />}</>;
+}

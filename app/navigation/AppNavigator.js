@@ -5,6 +5,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import BottomTabNavigator from './BottomTabNavigator';
+import constants from '../constants/constants';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -16,13 +17,15 @@ export default function AppNavigator() {
     <>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="OnBoardingScreen"
-            component={OnBoardingScreen}
-            options={{
-              headerShown: false,
-            }}
-          />
+          {!constants.onBoardingStatus && (
+            <Stack.Screen
+              name="OnBoardingScreen"
+              component={OnBoardingScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+          )}
           <Stack.Screen
             name="BottomTabNavigator"
             component={BottomTabNavigator}
