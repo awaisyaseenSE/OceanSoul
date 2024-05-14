@@ -4,6 +4,8 @@ import AppNavigator from './app/navigation/AppNavigator';
 import SplashScreen from './app/screens/SplashScreen';
 import {getValue} from './app/helper/storeAndGetAsyncStorageValue';
 import constants from './app/constants/constants';
+import AuthNavigator from './app/navigation/AuthNavigator';
+import MainNavigator from './app/navigation/MainNavigator';
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -27,5 +29,5 @@ export default function App() {
     }
   };
 
-  return <>{splashDone ? <AppNavigator /> : <SplashScreen />}</>;
+  return <>{splashDone ? <MainNavigator /> : <SplashScreen />}</>;
 }

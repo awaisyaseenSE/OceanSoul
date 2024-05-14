@@ -15,26 +15,24 @@ const {width, height} = Dimensions.get('window');
 export default function AppNavigator() {
   return (
     <>
-      <NavigationContainer>
-        <Stack.Navigator>
-          {!constants.onBoardingStatus && (
-            <Stack.Screen
-              name="OnBoardingScreen"
-              component={OnBoardingScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-          )}
+      <Stack.Navigator>
+        {!constants.onBoardingStatus && (
           <Stack.Screen
-            name="BottomTabNavigator"
-            component={BottomTabNavigator}
+            name="OnBoardingScreen"
+            component={OnBoardingScreen}
             options={{
               headerShown: false,
             }}
           />
-        </Stack.Navigator>
-      </NavigationContainer>
+        )}
+        <Stack.Screen
+          name="BottomTabNavigator"
+          component={BottomTabNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
     </>
   );
 }

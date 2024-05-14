@@ -16,6 +16,8 @@ import colors from '../styles/colors';
 import TextInputWithLeftIconCompo from '../components/TextInputWithLeftIconCompo';
 import ButtonComponent from '../components/ButtonComponent';
 import {validateEmail} from '../helper/validation';
+import navigationStrings from '../navigation/navigationStrings';
+import {useNavigation} from '@react-navigation/native';
 
 export default function SignUpScreen() {
   const [email, setEmail] = useState('');
@@ -26,6 +28,7 @@ export default function SignUpScreen() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+  const navigation = useNavigation();
 
   const handleSignUp = () => {
     if (password === '') {
@@ -212,7 +215,10 @@ export default function SignUpScreen() {
                   paddingHorizontal: 10,
                   paddingVertical: 6,
                 }}
-                activeOpacity={0.6}>
+                activeOpacity={0.6}
+                onPress={() =>
+                  navigation.navigate(navigationStrings.LoginScreen)
+                }>
                 <Text style={styles.createAccountTxt}>
                   I already have an Account{' '}
                   <Text

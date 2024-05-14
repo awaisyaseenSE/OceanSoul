@@ -16,6 +16,8 @@ import colors from '../styles/colors';
 import TextInputWithLeftIconCompo from '../components/TextInputWithLeftIconCompo';
 import ButtonComponent from '../components/ButtonComponent';
 import {validateEmail} from '../helper/validation';
+import {useNavigation} from '@react-navigation/native';
+import navigationStrings from '../navigation/navigationStrings';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -24,6 +26,7 @@ export default function LoginScreen() {
   const [isSignIn, setIsSignIn] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const navigation = useNavigation();
 
   const handleLogin = () => {
     if (password === '') {
@@ -126,7 +129,10 @@ export default function LoginScreen() {
               style={{
                 alignSelf: 'flex-end',
                 paddingVertical: 4,
-              }}>
+              }}
+              onPress={() =>
+                navigation.navigate(navigationStrings.ForgotPasswordScreen)
+              }>
               <Text style={styles.forgotTxt}>Forgot Password?</Text>
             </TouchableOpacity>
             <ButtonComponent
@@ -167,7 +173,10 @@ export default function LoginScreen() {
                   paddingHorizontal: 10,
                   paddingVertical: 6,
                 }}
-                activeOpacity={0.6}>
+                activeOpacity={0.6}
+                onPress={() =>
+                  navigation.navigate(navigationStrings.SignUpScreen)
+                }>
                 <Text style={styles.createAccountTxt}>
                   Create An Account{' '}
                   <Text
