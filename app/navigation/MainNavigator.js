@@ -4,7 +4,7 @@ import AuthNavigator from './AuthNavigator';
 import AppNavigator from './AppNavigator';
 
 function MainNavigator() {
-  let isAppshow = false;
+  let isAppshow = true;
   return (
     <NavigationContainer>
       {isAppshow ? <AppNavigator /> : <AuthNavigator />}
