@@ -11,7 +11,6 @@ import {
 import React, {useEffect, useRef, useState} from 'react';
 import colors from '../styles/colors';
 import FastImage from 'react-native-fast-image';
-import {height} from 'deprecated-react-native-prop-types/DeprecatedImagePropType';
 import fontFamily from '../styles/fontFamily';
 
 const screenWidth = Dimensions.get('window').width;
@@ -131,7 +130,7 @@ const ShowAllProductsCompo = () => {
     <>
       {loading && (
         <View style={{marginTop: 12}}>
-          <ActivityIndicator size={'large'} color={colors.red} />
+          <ActivityIndicator size={'large'} color={colors.gray_dark} />
         </View>
       )}
       {allProducts.length > 0 && (

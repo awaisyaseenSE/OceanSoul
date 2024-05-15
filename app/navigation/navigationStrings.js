@@ -5,4 +5,7 @@ export default {
   LoginScreen: 'LoginScreen',
   SignUpScreen: 'SignUpScreen',
   ForgotPasswordScreen: 'ForgotPasswordScreen',
+  DealProductsScreen: 'DealProductsScreen',
+  TrendingProductsScreen: 'TrendingProductsScreen',
+  NewArrivalProductsScreen: 'NewArrivalProductsScreen',
 };

@@ -2,9 +2,11 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
-import {rows} from 'deprecated-react-native-prop-types/DeprecatedTextInputPropTypes';
+import {useNavigation} from '@react-navigation/native';
+import navigationStrings from '../navigation/navigationStrings';
 
 const TredingProductsBannerCompo = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View
@@ -22,7 +24,12 @@ const TredingProductsBannerCompo = () => {
         </View>
       </View>
       <View style={styles.row2}>
-        <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
+        <TouchableOpacity
+          style={styles.btn}
+          activeOpacity={0.8}
+          onPress={() =>
+            navigation.navigate(navigationStrings.TrendingProductsScreen)
+          }>
           <Text style={styles.btnTxt}>Visit now</Text>
           <Image
             source={require('../assets/right-arrow.png')}

@@ -6,6 +6,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import OnBoardingScreen from '../screens/OnBoardingScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 import constants from '../constants/constants';
+import DealProductsScreen from '../screens/offers/DealProductsScreen';
+import TrendingProductsScreen from '../screens/offers/TrendingProductsScreen';
+import NewArrivalProductsScreen from '../screens/offers/NewArrivalProductsScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -28,6 +31,27 @@ export default function AppNavigator() {
         <Stack.Screen
           name="BottomTabNavigator"
           component={BottomTabNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="DealProductsScreen"
+          component={DealProductsScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="TrendingProductsScreen"
+          component={TrendingProductsScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="NewArrivalProductsScreen"
+          component={NewArrivalProductsScreen}
           options={{
             headerShown: false,
           }}

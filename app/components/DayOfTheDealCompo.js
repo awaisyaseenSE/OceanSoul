@@ -2,8 +2,11 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
+import {useNavigation} from '@react-navigation/native';
+import navigationStrings from '../navigation/navigationStrings';
 
 const DayOfTheDealCompo = () => {
+  const navigation = useNavigation();
   const [remainingTime, setRemainingTime] = useState(calculateRemainingTime());
   function calculateRemainingTime() {
     // const targetTime = new Date('2024-05-14T22:55:20').getTime()
@@ -60,7 +63,12 @@ const DayOfTheDealCompo = () => {
           </View>
         </View>
         <View style={styles.secondRow}>
-          <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
+          <TouchableOpacity
+            style={styles.btn}
+            activeOpacity={0.8}
+            onPress={() =>
+              navigation.navigate(navigationStrings.DealProductsScreen)
+            }>
             <Text style={styles.txt2}>View all</Text>
             <Image
               source={require('../assets/right-arrow.png')}

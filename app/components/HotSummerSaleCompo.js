@@ -10,11 +10,14 @@ import React from 'react';
 import FastImage from 'react-native-fast-image';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
+import {useNavigation} from '@react-navigation/native';
+import navigationStrings from '../navigation/navigationStrings';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 const HotSummerSaleCompo = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <FastImage
@@ -27,7 +30,12 @@ const HotSummerSaleCompo = () => {
         <View style={styles.row}>
           <Text style={styles.txt}>Summner' 25 collections</Text>
           <View>
-            <TouchableOpacity style={styles.btn} activeOpacity={0.8}>
+            <TouchableOpacity
+              style={styles.btn}
+              activeOpacity={0.8}
+              onPress={() =>
+                navigation.navigate(navigationStrings.NewArrivalProductsScreen)
+              }>
               <Text style={styles.btnTxt}>Visit All</Text>
               <Image
                 source={require('../assets/right-arrow.png')}

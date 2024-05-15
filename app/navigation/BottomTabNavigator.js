@@ -24,7 +24,7 @@ const BottomTabNavigator = () => {
         tabBarStyle: {
           backgroundColor: colors.white_light2,
           position: 'absolute',
-          bottom: Platform.OS === 'android' ? 10 : insets.bottom - 16,
+          bottom: Platform.OS === 'android' ? 0 : insets.bottom - 16,
           borderTopWidth: 1.2,
           paddingVertical: 4,
           height: 60,

@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     paddingVertical: Platform.OS === 'android' ? 5 : 0,
-    backgroundColor: colors.white,
+    backgroundColor: colors.white_light2,
   },
 });
