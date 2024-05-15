@@ -4,8 +4,18 @@ import {category} from '../helper/ProductsData';
 import FastImage from 'react-native-fast-image';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
+import {useNavigation} from '@react-navigation/native';
+import navigationStrings from '../navigation/navigationStrings';
 
 const ProductCategoryCompo = ({setSelectedCategory}) => {
+  const navigation = useNavigation();
+  const handleOnPress = name => {
+    setSelectedCategory(name);
+    navigation.navigate(navigationStrings.NewArrivalProductsScreen, {
+      name: name,
+      title: `${name} Collection`,
+    });
+  };
   const renderItem = ({item, index}) => {
     return (
       <TouchableOpacity
@@ -16,7 +26,7 @@ const ProductCategoryCompo = ({setSelectedCategory}) => {
           },
         ]}
         activeOpacity={0.6}
-        onPress={() => setSelectedCategory(item.name)}>
+        onPress={() => handleOnPress(item?.name)}>
         <FastImage
           source={{
             uri: item?.img

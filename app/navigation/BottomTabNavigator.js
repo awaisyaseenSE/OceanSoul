@@ -81,12 +81,18 @@ const BottomTabNavigator = () => {
 
           tabBarIcon: ({focused}) => {
             return (
-              <View style={styles.shoppingCartContainer}>
+              <View
+                style={[
+                  styles.shoppingCartContainer,
+                  {
+                    backgroundColor: focused ? colors.red : colors.white,
+                  },
+                ]}>
                 <Image
                   source={require('../assets/shopping-cart.png')}
                   style={[
                     styles.iconStyle,
-                    {tintColor: focused ? colors.red : colors.black},
+                    {tintColor: focused ? colors.white : colors.black},
                   ]}
                 />
               </View>
