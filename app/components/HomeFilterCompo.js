@@ -3,17 +3,20 @@ import React from 'react';
 import fontFamily from '../styles/fontFamily';
 import colors from '../styles/colors';
 
-const HomeFilterCompo = () => {
+const HomeFilterCompo = ({onPressSort, onPressFilter}) => {
   return (
     <View style={[styles.container, {marginTop: 12}]}>
       <Text style={styles.heading}>All Featured</Text>
       <View style={styles.container}>
-        <TouchableOpacity style={[styles.container, styles.iconContainer]}>
+        <TouchableOpacity
+          style={[styles.container, styles.iconContainer]}
+          onPress={onPressSort}>
           <Text style={styles.txt}>Sort</Text>
           <Image source={require('../assets/sort.png')} style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.container, styles.iconContainer, {marginLeft: 8}]}>
+          style={[styles.container, styles.iconContainer, {marginLeft: 8}]}
+          onPress={onPressFilter}>
           <Text style={styles.txt}>Filter</Text>
           <Image source={require('../assets/filter.png')} style={styles.icon} />
         </TouchableOpacity>

@@ -10,7 +10,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import FastImage from 'react-native-fast-image';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
@@ -20,11 +20,6 @@ const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 const HomeSearchDataCompo = ({
-  searchText,
-  setLoading,
-  loading,
-  showSearchData,
-  setSearchText,
   products,
   loadingMore,
   hasMore,
@@ -132,11 +127,6 @@ const HomeSearchDataCompo = ({
             fetchTrendingProducts(page + 1);
           }
         }}
-        // onMomentumScrollEnd={() => {
-        //   if (hasMore && !loadingMore) {
-        //     setPage(prevPage => prevPage + 1);
-        //   }
-        // }}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
           loadingMore && hasMore ? (
@@ -145,8 +135,6 @@ const HomeSearchDataCompo = ({
             </View>
           ) : null
         }
-        // scrollEnabled={false}
-        // nestedScrollEnabled
       />
     </View>
   );

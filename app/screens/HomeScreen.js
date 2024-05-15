@@ -1,5 +1,5 @@
 import {View, StyleSheet, Dimensions, ScrollView, Text} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useMemo} from 'react';
 import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
 import TopHomeScreenCompo from '../components/TopHomeScreenCompo';
@@ -16,6 +16,8 @@ import HotSummerSaleCompo from '../components/HotSummerSaleCompo';
 import SponseredCompo from '../components/SponseredCompo';
 import HomeSearchDataCompo from '../components/HomeSearchDataCompo';
 import constants from '../constants/constants';
+import SortedByCompoModal from './searchComponents/SortedByCompoModal';
+import FilterHomeCompoModal from './searchComponents/FilterHomeCompoModal';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -29,6 +31,13 @@ export default function HomeScreen() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [sortedBy, setSortedBy] = useState('');
+  const [showSortedByModal, setShowSortedByModal] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+
+  const [minPrice, setMinPrice] = useState('1');
+  const [maxPrice, setMaxPrice] = useState('100000000');
+  const [productCondition, setProductCondition] = useState('NEW');
 
   const handleOnPressSearch = async () => {
     if (searchText.length > 2) {
@@ -46,7 +55,7 @@ export default function HomeScreen() {
     setLoadingMore(true);
     setLoading(true);
 
-    const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=${searchText}&page=${page}&country=${country}`;
+    const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=${searchText}&page=${page}&country=${country}&sort_by=${sortedBy}&min_price=${minPrice}&max_price=${maxPrice}&product_condition=${productCondition}`;
     const options = {
       method: 'GET',
       headers: {
@@ -57,9 +66,9 @@ export default function HomeScreen() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
+      console.log(result);
       if (!!result && result?.data?.products?.length > 0) {
-        // setProducts(result?.data?.products);
-        console.log('hello: ', result?.data?.products?.length);
+        console.log('Total Products: ', result?.data?.products?.length);
         if (page > 1) {
           setProducts(prevProducts => [
             ...prevProducts,
@@ -87,16 +96,6 @@ export default function HomeScreen() {
     <>
       <ScreenComponent style={{backgroundColor: colors.white_light2}}>
         <TopHomeScreenCompo />
-        {/* <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{flex: 1}}
-          scrollToOverflowEnabled={false}
-          onMomentumScrollEnd={() => {
-            if (searchText !== '' && showSearchData) {
-              setPage(prevPage => prevPage + 1);
-              // fetchTrendingProducts(page + 1);
-            }
-          }}> */}
         <View style={styles.container}>
           <View style={{paddingHorizontal: 20}}>
             <TextInputWithLeftIconCompo
@@ -123,15 +122,13 @@ export default function HomeScreen() {
               onPress={handleOnPressSearch}
               loading={loading}
             />
-            <HomeFilterCompo />
+            <HomeFilterCompo
+              onPressSort={() => setShowSortedByModal(true)}
+              onPressFilter={() => setShowFilterModal(true)}
+            />
           </View>
           {showSearchData ? (
             <HomeSearchDataCompo
-              searchText={searchText}
-              loading={loading}
-              setLoading={setLoading}
-              setSearchText={setSearchText}
-              showSearchData={showSearchData}
               products={products}
               setProducts={setProducts}
               loadingMore={loadingMore}
@@ -143,6 +140,7 @@ export default function HomeScreen() {
               fetchTrendingProducts={fetchTrendingProducts}
             />
           ) : (
+            // <SearchDataComponent />
             <ScrollView
               style={{flex: 1, marginTop: 8}}
               showsVerticalScrollIndicator={false}>
@@ -161,8 +159,27 @@ export default function HomeScreen() {
           )}
           <View style={{marginVertical: 32}} />
         </View>
-        {/* </ScrollView> */}
       </ScreenComponent>
+      {showSortedByModal && (
+        <SortedByCompoModal
+          show={showSortedByModal}
+          setShow={setShowSortedByModal}
+          sortedBy={sortedBy}
+          setSortedBy={setSortedBy}
+        />
+      )}
+      {showFilterModal && (
+        <FilterHomeCompoModal
+          show={showFilterModal}
+          setShow={setShowFilterModal}
+          minPrice={minPrice}
+          setMinPrice={setMinPrice}
+          maxPrice={maxPrice}
+          setMaxPrice={setMaxPrice}
+          productCondition={productCondition}
+          setProductCondition={setProductCondition}
+        />
+      )}
     </>
   );
 }
