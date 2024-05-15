@@ -35,8 +35,8 @@ export default function HomeScreen() {
   const [showSortedByModal, setShowSortedByModal] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
 
-  const [minPrice, setMinPrice] = useState('1');
-  const [maxPrice, setMaxPrice] = useState('100000000');
+  const [minPrice, setMinPrice] = useState(1);
+  const [maxPrice, setMaxPrice] = useState(5000);
   const [productCondition, setProductCondition] = useState('NEW');
 
   const handleOnPressSearch = async () => {

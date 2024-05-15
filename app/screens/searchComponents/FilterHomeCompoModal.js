@@ -12,8 +12,10 @@ import React from 'react';
 import colors from '../../styles/colors';
 import fontFamily from '../../styles/fontFamily';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
 
 const FilterHomeCompoModal = ({
   show,
@@ -65,7 +67,43 @@ const FilterHomeCompoModal = ({
             </View>
           </View>
           <View style={styles.line} />
-          <View style={styles.container}></View>
+          <View style={styles.container}>
+            <Text>
+              Min: {minPrice} Max: {maxPrice}
+            </Text>
+            <MultiSlider
+              values={[1, 5000]}
+              step={1}
+              min={1}
+              max={5000}
+              isMarkersSeparated={true}
+              onValuesChange={values => {
+                console.log(' ,,,,    ', values);
+                setMinPrice(values[0]);
+                setMaxPrice(values[1]);
+              }}
+              selectedStyle={{backgroundColor: colors.red_dark}}
+              sliderLength={screenWidth - 50}
+              customMarkerLeft={() => {
+                return (
+                  <View
+                    style={{
+                      backgroundColor: colors.yellow_dark,
+                      height: 20,
+                      width: 20,
+                    }}
+                  />
+                );
+              }}
+              customMarkerRight={() => {
+                return (
+                  <View
+                    style={{backgroundColor: colors.red, height: 20, width: 20}}
+                  />
+                );
+              }}
+            />
+          </View>
         </View>
       </View>
     </Modal>
