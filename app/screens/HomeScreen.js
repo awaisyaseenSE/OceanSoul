@@ -66,7 +66,7 @@ export default function HomeScreen() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(result);
+
       if (!!result && result?.data?.products?.length > 0) {
         console.log('Total Products: ', result?.data?.products?.length);
         if (page > 1) {
