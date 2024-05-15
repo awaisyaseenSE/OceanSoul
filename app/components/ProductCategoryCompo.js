@@ -7,10 +7,9 @@ import fontFamily from '../styles/fontFamily';
 import {useNavigation} from '@react-navigation/native';
 import navigationStrings from '../navigation/navigationStrings';
 
-const ProductCategoryCompo = ({setSelectedCategory}) => {
+const ProductCategoryCompo = () => {
   const navigation = useNavigation();
   const handleOnPress = name => {
-    setSelectedCategory(name);
     navigation.navigate(navigationStrings.NewArrivalProductsScreen, {
       name: name,
       title: `${name} Collection`,
