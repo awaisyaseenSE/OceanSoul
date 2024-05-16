@@ -65,7 +65,7 @@ export default function OnBoardingScreen() {
       console.log('Finish on boarding func is called!');
       let key = 'onBoarding';
       await storeValue(key, 'true');
-      navigation.dispatch(StackActions.replace('BottomTabNavigator'));
+      navigation.dispatch(StackActions.replace('MainRoutes'));
     } catch (error) {
       console.log('Error in finish on boarding screen function: ', error);
     }

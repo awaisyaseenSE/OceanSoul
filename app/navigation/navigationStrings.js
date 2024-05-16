@@ -2,6 +2,7 @@ export default {
   OnBoardingScreen: 'OnBoardingScreen',
   HomeScreen: 'HomeScreen',
   BottomTabNavigator: 'BottomTabNavigator',
+  MainRoutes: 'MainRoutes',
   LoginScreen: 'LoginScreen',
   SignUpScreen: 'SignUpScreen',
   ForgotPasswordScreen: 'ForgotPasswordScreen',

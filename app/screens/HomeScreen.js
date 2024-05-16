@@ -18,6 +18,7 @@ import HomeSearchDataCompo from '../components/HomeSearchDataCompo';
 import constants from '../constants/constants';
 import SortedByCompoModal from './searchComponents/SortedByCompoModal';
 import FilterHomeCompoModal from './searchComponents/FilterHomeCompoModal';
+import {useNavigation} from '@react-navigation/native';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -39,6 +40,7 @@ export default function HomeScreen() {
   const [maxPrice, setMaxPrice] = useState(500000);
   const [productCondition, setProductCondition] = useState('NEW');
   const [category, setCategory] = useState('aps');
+  const navigation = useNavigation();
 
   const handleOnPressSearch = async () => {
     if (searchText.length > 2) {
@@ -97,7 +99,7 @@ export default function HomeScreen() {
   return (
     <>
       <ScreenComponent style={{backgroundColor: colors.white_light2}}>
-        <TopHomeScreenCompo />
+        <TopHomeScreenCompo onPressLeft={() => navigation.openDrawer()} />
         <View style={styles.container}>
           <View style={{paddingHorizontal: 20}}>
             <TextInputWithLeftIconCompo
