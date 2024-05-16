@@ -80,3 +80,242 @@ export const category = [
     img: 'https://images.unsplash.com/photo-1550226891-ef816aed4a98?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fEZ1cm5pdHVyZXxlbnwwfHwwfHx8MA%3D%3D',
   },
 ];
+
+export const amazonCategories = [
+  {
+    id: 'aps',
+    name: 'All Departments',
+  },
+  {
+    id: 'alexa-skills',
+    name: 'Alexa Skills',
+  },
+  {
+    id: 'amazon-devices',
+    name: 'Amazon Devices',
+  },
+  {
+    id: 'live-explorations',
+    name: 'Amazon Explore',
+  },
+  {
+    id: 'amazonfresh',
+    name: 'Amazon Fresh',
+  },
+  {
+    id: 'amazon-pharmacy',
+    name: 'Amazon Pharmacy',
+  },
+  {
+    id: 'warehouse-deals',
+    name: 'Amazon Warehouse',
+  },
+  {
+    id: 'appliances',
+    name: 'Appliances',
+  },
+  {
+    id: 'mobile-apps',
+    name: 'Apps & Games',
+  },
+  {
+    id: 'arts-crafts',
+    name: 'Arts, Crafts & Sewing',
+  },
+  {
+    id: 'audible',
+    name: 'Audible Books & Originals',
+  },
+  {
+    id: 'automotive',
+    name: 'Automotive Parts & Accessories',
+  },
+  {
+    id: 'courses',
+    name: 'AWS Courses',
+  },
+  {
+    id: 'baby-products',
+    name: 'Baby',
+  },
+  {
+    id: 'beauty',
+    name: 'Beauty & Personal Care',
+  },
+  {
+    id: 'stripbooks',
+    name: 'Books',
+  },
+  {
+    id: 'popular',
+    name: 'CDs & Vinyl',
+  },
+  {
+    id: 'mobile',
+    name: 'Cell Phones & Accessories',
+  },
+  {
+    id: 'fashion',
+    name: 'Clothing, Shoes & Jewelry',
+  },
+  {
+    id: 'fashion-womens',
+    name: '   Women',
+  },
+  {
+    id: 'fashion-mens',
+    name: '   Men',
+  },
+  {
+    id: 'fashion-girls',
+    name: '   Girls',
+  },
+  {
+    id: 'fashion-boys',
+    name: '   Boys',
+  },
+  {
+    id: 'fashion-baby',
+    name: '   Baby',
+  },
+  {
+    id: 'collectibles',
+    name: 'Collectibles & Fine Art',
+  },
+  {
+    id: 'computers',
+    name: 'Computers',
+  },
+  {
+    id: 'financial',
+    name: 'Credit and Payment Cards',
+  },
+  {
+    id: 'edu-alt-content',
+    name: 'Digital Educational Resources',
+  },
+  {
+    id: 'digital-music',
+    name: 'Digital Music',
+  },
+  {
+    id: 'electronics',
+    name: 'Electronics',
+  },
+  {
+    id: 'lawngarden',
+    name: 'Garden & Outdoor',
+  },
+  {
+    id: 'gift-cards',
+    name: 'Gift Cards',
+  },
+  {
+    id: 'grocery',
+    name: 'Grocery & Gourmet Food',
+  },
+  {
+    id: 'handmade',
+    name: 'Handmade',
+  },
+  {
+    id: 'hpc',
+    name: 'Health, Household & Baby Care',
+  },
+  {
+    id: 'local-services',
+    name: 'Home & Business Services',
+  },
+  {
+    id: 'garden',
+    name: 'Home & Kitchen',
+  },
+  {
+    id: 'industrial',
+    name: 'Industrial & Scientific',
+  },
+  {
+    id: 'prime-exclusive',
+    name: 'Just for Prime',
+  },
+  {
+    id: 'digital-text',
+    name: 'Kindle Store',
+  },
+  {
+    id: 'fashion-luggage',
+    name: 'Luggage & Travel Gear',
+  },
+  {
+    id: 'luxury',
+    name: 'Luxury Stores',
+  },
+  {
+    id: 'magazines',
+    name: 'Magazine Subscriptions',
+  },
+  {
+    id: 'movies-tv',
+    name: 'Movies & TV',
+  },
+  {
+    id: 'mi',
+    name: 'Musical Instruments',
+  },
+  {
+    id: 'office-products',
+    name: 'Office Products',
+  },
+  {
+    id: 'pets',
+    name: 'Pet Supplies',
+  },
+  {
+    id: 'luxury-beauty',
+    name: 'Premium Beauty',
+  },
+  {
+    id: 'instant-video',
+    name: 'Prime Video',
+  },
+  {
+    id: 'smart-home',
+    name: 'Smart Home',
+  },
+  {
+    id: 'software',
+    name: 'Software',
+  },
+  {
+    id: 'sporting',
+    name: 'Sports & Outdoors',
+  },
+  {
+    id: 'specialty-aps-sns',
+    name: 'Subscribe & Save',
+  },
+  {
+    id: 'subscribe-with-amazon',
+    name: 'Subscription Boxes',
+  },
+  {
+    id: 'tools',
+    name: 'Tools & Home Improvement',
+  },
+  {
+    id: 'toys-and-games',
+    name: 'Toys & Games',
+  },
+  {
+    id: 'under-ten-dollars',
+    name: 'Under $10',
+  },
+  {
+    id: 'videogames',
+    name: 'Video Games',
+  },
+  {
+    id: 'wholefoods',
+    name: 'Whole Foods Market',
+  },
+];

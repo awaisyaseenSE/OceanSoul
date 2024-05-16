@@ -16,6 +16,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import ButtonComponent from '../../components/ButtonComponent';
 import FastImage from 'react-native-fast-image';
+import {amazonCategories, category} from '../../helper/ProductsData';
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -32,10 +33,13 @@ const FilterHomeCompoModal = ({
   country,
   setCountry,
   handleOnPressSearch,
+  category,
+  setCategory,
 }) => {
   const insets = useSafeAreaInsets();
   const product_conditionArr = ['NEW', 'USED', 'RENEWED', 'COLLECTIBLE'];
-  const [isCountryShow, setIsCountryShow] = useState(true);
+  const [isCountryShow, setIsCountryShow] = useState(false);
+  const [isCategoryShow, setIsCategoryShow] = useState(false);
 
   let countryData = [
     {
@@ -174,6 +178,42 @@ const FilterHomeCompoModal = ({
     );
   };
 
+  const renderItemCategoy = ({item, index}) => {
+    let isEven = index % 2 == 0 ? true : false;
+    return (
+      <TouchableOpacity
+        style={[
+          styles.categoryCotainer,
+          {
+            marginLeft: isEven ? 0 : 4,
+            marginRight: isEven ? 4 : 0,
+          },
+        ]}
+        onPress={() => setCategory(item?.id)}
+        activeOpacity={0.8}>
+        <View style={styles.circle}>
+          <View
+            style={item?.id === category ? styles.fillRadio : styles.radio}
+          />
+        </View>
+        <Text
+          style={[
+            styles.txt1,
+            {
+              marginLeft: 6,
+              fontFamily:
+                item?.id === category
+                  ? fontFamily.semi_bold
+                  : fontFamily.medium,
+            },
+          ]}
+          numberOfLines={2}>
+          {item?.name}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <Modal visible={show} transparent animationType="slide">
       <View
@@ -244,6 +284,38 @@ const FilterHomeCompoModal = ({
                   renderItem={renderItem}
                   keyExtractor={(item, index) => index.toString()}
                   showsVerticalScrollIndicator={false}
+                />
+              )}
+              <TouchableOpacity
+                style={styles.row}
+                activeOpacity={0.6}
+                onPress={() => setIsCategoryShow(!isCategoryShow)}>
+                <Text
+                  style={[
+                    styles.heading,
+                    {
+                      marginBottom: 0,
+                    },
+                  ]}>
+                  Category
+                </Text>
+
+                <Image
+                  source={
+                    isCategoryShow
+                      ? require('../../assets/upward-arrow.png')
+                      : require('../../assets/down.png')
+                  }
+                  style={styles.icon2}
+                />
+              </TouchableOpacity>
+              {isCategoryShow && (
+                <FlatList
+                  data={amazonCategories}
+                  renderItem={renderItemCategoy}
+                  keyExtractor={(item, index) => index.toString()}
+                  showsVerticalScrollIndicator={false}
+                  numColumns={2}
                 />
               )}
             </View>
@@ -469,6 +541,34 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     tintColor: colors.black,
+  },
+  categoryCotainer: {
+    marginBottom: 4,
+    flex: 1,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  radio: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+  },
+  fillRadio: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: colors.red,
+  },
+  circle: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: colors.black,
   },
 });
 

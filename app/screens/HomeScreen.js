@@ -38,6 +38,7 @@ export default function HomeScreen() {
   const [minPrice, setMinPrice] = useState(1);
   const [maxPrice, setMaxPrice] = useState(500000);
   const [productCondition, setProductCondition] = useState('NEW');
+  const [category, setCategory] = useState('aps');
 
   const handleOnPressSearch = async () => {
     if (searchText.length > 2) {
@@ -55,7 +56,7 @@ export default function HomeScreen() {
     setLoadingMore(true);
     setLoading(true);
 
-    const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=${searchText}&page=${page}&country=${country}&sort_by=${sortedBy}&min_price=${minPrice}&max_price=${maxPrice}&product_condition=${productCondition}`;
+    const url = `https://real-time-amazon-data.p.rapidapi.com/search?query=${searchText}&page=${page}&country=${country}&category_id=${category}&sort_by=${sortedBy}&min_price=${minPrice}&max_price=${maxPrice}&product_condition=${productCondition}`;
     const options = {
       method: 'GET',
       headers: {
@@ -182,6 +183,8 @@ export default function HomeScreen() {
           country={country}
           setCountry={setCountry}
           handleOnPressSearch={handleOnPressSearch}
+          category={category}
+          setCategory={setCategory}
         />
       )}
     </>
