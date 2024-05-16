@@ -483,7 +483,7 @@ const styles = StyleSheet.create({
     width: 20,
     borderRadius: 10,
 
-    backgroundColor: colors.yellow_dark,
+    backgroundColor: colors.red_dark2,
   },
   txt: {
     fontSize: 14,

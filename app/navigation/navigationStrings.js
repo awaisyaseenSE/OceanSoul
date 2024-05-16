@@ -9,4 +9,5 @@ export default {
   DealProductsScreen: 'DealProductsScreen',
   TrendingProductsScreen: 'TrendingProductsScreen',
   NewArrivalProductsScreen: 'NewArrivalProductsScreen',
+  ProfileScreen: 'ProfileScreen',
 };

@@ -13,7 +13,9 @@ const TopHomeScreenCompo = ({onPressLeft, onPressRight}) => {
       <Image source={require('../assets/logo.png')} style={styles.logo} />
       <TouchableOpacity onPress={onPressRight}>
         <FastImage
-          source={require('../assets/user-image.png')}
+          source={{
+            uri: 'https://cdn.pixabay.com/photo/2017/03/27/13/28/man-2178721_1280.jpg',
+          }}
           style={styles.profileImage}
         />
       </TouchableOpacity>

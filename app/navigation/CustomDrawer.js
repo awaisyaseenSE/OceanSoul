@@ -1,6 +1,6 @@
 import React from 'react';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-import {View, Text, Platform, StyleSheet} from 'react-native';
+import {View, Text, Platform, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import DrawerItemListCompo from './DrawerItemListCompo';
 import navigationStrings from './navigationStrings';
@@ -15,15 +15,22 @@ function CustomDrawer(props) {
     <>
       <DrawerContentScrollView
         style={{
-          backgroundColor: colors.bottomTabBg,
+          backgroundColor: colors.gray_light,
           width: '100%',
           paddingHorizontal: 12,
         }}
         showsVerticalScrollIndicator={false}>
-        <FastImage
-          source={require('../assets/user-image.png')}
-          style={styles.profileImage}
-        />
+        <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate(navigationStrings.ProfileScreen)
+            }>
+            <FastImage
+              source={require('../assets/user-image.png')}
+              style={styles.profileImage}
+            />
+          </TouchableOpacity>
+        </View>
         <Text
           style={[
             styles.userNameText,

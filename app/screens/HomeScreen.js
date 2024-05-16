@@ -19,6 +19,7 @@ import constants from '../constants/constants';
 import SortedByCompoModal from './searchComponents/SortedByCompoModal';
 import FilterHomeCompoModal from './searchComponents/FilterHomeCompoModal';
 import {useNavigation} from '@react-navigation/native';
+import navigationStrings from '../navigation/navigationStrings';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -99,7 +100,12 @@ export default function HomeScreen() {
   return (
     <>
       <ScreenComponent style={{backgroundColor: colors.white_light2}}>
-        <TopHomeScreenCompo onPressLeft={() => navigation.openDrawer()} />
+        <TopHomeScreenCompo
+          onPressLeft={() => navigation.openDrawer()}
+          onPressRight={() =>
+            navigation.navigate(navigationStrings.ProfileScreen)
+          }
+        />
         <View style={styles.container}>
           <View style={{paddingHorizontal: 20}}>
             <TextInputWithLeftIconCompo
