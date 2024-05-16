@@ -36,7 +36,7 @@ export default function HomeScreen() {
   const [showFilterModal, setShowFilterModal] = useState(false);
 
   const [minPrice, setMinPrice] = useState(1);
-  const [maxPrice, setMaxPrice] = useState(5000);
+  const [maxPrice, setMaxPrice] = useState(500000);
   const [productCondition, setProductCondition] = useState('NEW');
 
   const handleOnPressSearch = async () => {
@@ -84,6 +84,7 @@ export default function HomeScreen() {
       setLoading(false);
       setLoadingMore(false);
       console.log('page no is: ', page);
+
       return true;
     } catch (error) {
       setLoading(false);
@@ -178,6 +179,9 @@ export default function HomeScreen() {
           setMaxPrice={setMaxPrice}
           productCondition={productCondition}
           setProductCondition={setProductCondition}
+          country={country}
+          setCountry={setCountry}
+          handleOnPressSearch={handleOnPressSearch}
         />
       )}
     </>

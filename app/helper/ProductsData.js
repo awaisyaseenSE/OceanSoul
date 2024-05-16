@@ -42,7 +42,7 @@ export const category = [
   {
     id: 3,
     name: 'Mens',
-    img: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1lbnMlMjBjbG90aGluZ3xlbnwwfHwwfHx8MA%3D%3D',
+    img: 'https://currenwatches.com.pk/cdn/shop/collections/c2_991873fd-0363-4266-a830-89148caea4c6_750x.jpg?v=1708148108',
   },
   {
     id: 4,

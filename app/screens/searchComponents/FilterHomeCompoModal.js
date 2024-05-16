@@ -7,12 +7,15 @@ import {
   StyleSheet,
   Dimensions,
   Platform,
+  FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import colors from '../../styles/colors';
 import fontFamily from '../../styles/fontFamily';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import ButtonComponent from '../../components/ButtonComponent';
+import FastImage from 'react-native-fast-image';
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -26,8 +29,150 @@ const FilterHomeCompoModal = ({
   setMaxPrice,
   productCondition,
   setProductCondition,
+  country,
+  setCountry,
+  handleOnPressSearch,
 }) => {
   const insets = useSafeAreaInsets();
+  const product_conditionArr = ['NEW', 'USED', 'RENEWED', 'COLLECTIBLE'];
+  const [isCountryShow, setIsCountryShow] = useState(true);
+
+  let countryData = [
+    {
+      id: 'US',
+      name: 'United States',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_the_United_States.png/1200px-Flag_of_the_United_States.png',
+    },
+    {
+      id: 'AU',
+      name: 'Australia',
+      img: 'https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Flag_of_Australia.svg/1280px-Flag_of_Australia.svg.png',
+    },
+    {
+      id: 'BR',
+      name: 'Brazil',
+      img: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/2560px-Flag_of_Brazil.svg.png',
+    },
+    {
+      id: 'CA',
+      name: 'Canada',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Flag_of_Canada.png/1200px-Flag_of_Canada.png',
+    },
+    {
+      id: 'CN',
+      name: 'China',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Flag_of_China.png',
+    },
+    {
+      id: 'FR',
+      name: 'France',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Flag_of_France.png/1280px-Flag_of_France.png',
+    },
+    {
+      id: 'DE',
+      name: 'Germany',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Flag_of_germany_800_480.png',
+    },
+    {
+      id: 'IN',
+      name: 'India',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Flag_of_India.png',
+    },
+    {
+      id: 'IT',
+      name: 'Itlay',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Flag_of_Italy_%281946%E2%80%932003%29.png',
+    },
+    {
+      id: 'MX',
+      name: 'Mexico',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/1/17/Flag_of_Mexico.png',
+    },
+    {
+      id: 'NL',
+      name: 'Netherlands',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Flag_of_the_Netherlands.png/800px-Flag_of_the_Netherlands.png',
+    },
+    {
+      id: 'SG',
+      name: 'Singapore',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Flag_of_Singapore.svg/2560px-Flag_of_Singapore.svg.png',
+    },
+    {
+      id: 'ES',
+      name: 'Spain',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Spain_flag_300.png',
+    },
+    {
+      id: 'TR',
+      name: 'Turkey',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Flag_of_Turkey.png',
+    },
+    {
+      id: 'AE',
+      name: 'United Arab Emirates (UAE)',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_the_United_Arab_Emirates.svg/2560px-Flag_of_the_United_Arab_Emirates.svg.png',
+    },
+    {
+      id: 'GB',
+      name: 'United Kingdom',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/4/42/Flag_of_the_United_Kingdom.png',
+    },
+    {
+      id: 'JP',
+      name: 'Japan',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/3/37/Japan_Flag.png',
+    },
+    {
+      id: 'SA',
+      name: 'South Africa',
+      img: 'https://www.countryflags.com/wp-content/uploads/south-africa-flag-png-xl.png',
+    },
+    {
+      id: 'PL',
+      name: 'Poland',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Poland_flag_300.png',
+    },
+    {
+      id: 'SE',
+      name: 'Serbia',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Flag_of_Serbia.png/1200px-Flag_of_Serbia.png',
+    },
+    {
+      id: 'BE',
+      name: 'Belgium',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Flag_of_Belgium.png',
+    },
+    {
+      id: 'EG',
+      name: 'Egypt',
+      img: 'https://upload.wikimedia.org/wikipedia/commons/1/10/Egypt_flag_300.png',
+    },
+  ];
+
+  const renderItem = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        style={styles.row}
+        activeOpacity={0.6}
+        onPress={() => setCountry(item?.id)}>
+        <Text
+          style={[
+            styles.txt1,
+            {
+              color: item?.id === country ? colors.red_dark2 : colors.black,
+            },
+          ]}>
+          {item?.name}
+        </Text>
+        <FastImage
+          source={{uri: item?.img}}
+          style={styles.img}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <Modal visible={show} transparent animationType="slide">
@@ -48,6 +193,7 @@ const FilterHomeCompoModal = ({
               paddingBottom: Platform.OS === 'ios' ? insets.bottom : 20,
             },
           ]}>
+          <View style={{marginVertical: 6}} />
           <View style={styles.row}>
             <TouchableOpacity
               style={styles.modalCloseIconContainer}
@@ -68,41 +214,107 @@ const FilterHomeCompoModal = ({
           </View>
           <View style={styles.line} />
           <View style={styles.container}>
-            <Text>
-              Min: {minPrice} Max: {maxPrice}
-            </Text>
-            <MultiSlider
-              values={[1, 5000]}
-              step={1}
-              min={1}
-              max={5000}
-              isMarkersSeparated={true}
-              onValuesChange={values => {
-                console.log(' ,,,,    ', values);
-                setMinPrice(values[0]);
-                setMaxPrice(values[1]);
-              }}
-              selectedStyle={{backgroundColor: colors.red_dark}}
-              sliderLength={screenWidth - 50}
-              customMarkerLeft={() => {
-                return (
-                  <View
-                    style={{
-                      backgroundColor: colors.yellow_dark,
-                      height: 20,
-                      width: 20,
-                    }}
-                  />
-                );
-              }}
-              customMarkerRight={() => {
-                return (
-                  <View
-                    style={{backgroundColor: colors.red, height: 20, width: 20}}
-                  />
-                );
-              }}
-            />
+            <View style={{flex: 1, paddingHorizontal: 16}}>
+              <TouchableOpacity
+                style={styles.row}
+                activeOpacity={0.6}
+                onPress={() => setIsCountryShow(!isCountryShow)}>
+                <Text
+                  style={[
+                    styles.heading,
+                    {
+                      marginBottom: 0,
+                    },
+                  ]}>
+                  Country
+                </Text>
+
+                <Image
+                  source={
+                    isCountryShow
+                      ? require('../../assets/upward-arrow.png')
+                      : require('../../assets/down.png')
+                  }
+                  style={styles.icon2}
+                />
+              </TouchableOpacity>
+              {isCountryShow && (
+                <FlatList
+                  data={countryData}
+                  renderItem={renderItem}
+                  keyExtractor={(item, index) => index.toString()}
+                  showsVerticalScrollIndicator={false}
+                />
+              )}
+            </View>
+            <View style={{paddingHorizontal: 12}}>
+              <Text style={styles.heading}>Product Condition</Text>
+              <View style={[styles.flexWrap, {marginBottom: 12}]}>
+                {product_conditionArr.map((item, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    style={[
+                      styles.typeContainer,
+                      {
+                        backgroundColor:
+                          item === productCondition
+                            ? colors.gray
+                            : colors.gray2,
+                      },
+                    ]}
+                    activeOpacity={0.7}
+                    onPress={() => setProductCondition(item)}>
+                    <Text
+                      style={[
+                        styles.txt,
+                        {
+                          color:
+                            item === productCondition
+                              ? colors.black_light
+                              : colors.black,
+                        },
+                      ]}>
+                      {item}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+            <View style={styles.line} />
+            <View style={{paddingHorizontal: 12, marginTop: 16}}>
+              <Text style={styles.heading}>Price</Text>
+              <Text style={styles.txt}>
+                {minPrice} - {maxPrice}
+              </Text>
+              <MultiSlider
+                values={[minPrice, maxPrice]}
+                step={10}
+                min={1}
+                max={500000}
+                isMarkersSeparated={true}
+                onValuesChange={values => {
+                  setMinPrice(values[0]);
+                  setMaxPrice(values[1]);
+                }}
+                selectedStyle={{backgroundColor: colors.red_dark2}}
+                sliderLength={screenWidth - 50}
+                customMarkerLeft={() => {
+                  return <View style={styles.marker2} />;
+                }}
+                customMarkerRight={() => {
+                  return <View style={styles.marker} />;
+                }}
+              />
+              <ButtonComponent
+                title="Apply"
+                style={styles.btn}
+                textStyle={styles.btntxt}
+                onPress={() => {
+                  setShow(false);
+                  handleOnPressSearch();
+                }}
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -113,7 +325,7 @@ const FilterHomeCompoModal = ({
 const styles = StyleSheet.create({
   modalView: {
     width: '100%',
-    height: screenHeight / 1.5,
+    height: screenHeight / 1.3,
     backgroundColor: colors.gray2,
     borderRadius: 12,
     alignSelf: 'center',
@@ -150,6 +362,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    backgroundColor: 'red',
   },
   icon: {
     width: 18,
@@ -165,9 +378,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingHorizontal: 12,
+
     marginTop: 10,
     marginBottom: 8,
+    justifyContent: 'flex-end',
   },
   row1: {
     marginBottom: 4,
@@ -185,6 +399,76 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: colors.black,
+  },
+  marker: {
+    backgroundColor: colors.red_dark2,
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+  },
+  marker2: {
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+
+    backgroundColor: colors.yellow_dark,
+  },
+  txt: {
+    fontSize: 14,
+    fontFamily: fontFamily.medium,
+    color: colors.black,
+    paddingHorizontal: 4,
+  },
+  heading: {
+    fontSize: 18,
+    fontFamily: fontFamily.semi_bold,
+    color: colors.black,
+    marginBottom: 8,
+  },
+  btn: {
+    backgroundColor: colors.red_dark2,
+    width: '60%',
+    alignSelf: 'center',
+    borderRadius: 22,
+  },
+  btntxt: {
+    color: colors.gray_light,
+    fontSize: 15,
+  },
+  flexWrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  typeContainer: {
+    borderWidth: 1,
+    borderColor: colors.gray,
+    borderRadius: 8,
+    borderCurve: 'continuous',
+    paddingHorizontal: 14,
+    paddingVertical: 4,
+  },
+  img: {
+    width: 44,
+    height: 30,
+    borderRadius: 4,
+  },
+  txt1: {
+    fontSize: 14,
+    fontFamily: fontFamily.medium,
+    color: colors.black,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    paddingHorizontal: 6,
+  },
+  icon2: {
+    width: 20,
+    height: 20,
+    tintColor: colors.black,
   },
 });
 
