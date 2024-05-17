@@ -14,6 +14,7 @@ import SettingListCompo from '../components/SettingListCompo';
 import {useNavigation} from '@react-navigation/native';
 import navigationStrings from '../navigation/navigationStrings';
 import FastImage from 'react-native-fast-image';
+import constants from '../constants/constants';
 
 export default function SettingScreen() {
   const navigation = useNavigation();
@@ -47,7 +48,7 @@ export default function SettingScreen() {
                     }>
                     <FastImage
                       source={{
-                        uri: 'https://cdn.pixabay.com/photo/2017/03/27/13/28/man-2178721_1280.jpg',
+                        uri: constants.userProfileImageURl,
                       }}
                       style={styles.profileImageStyle}
                     />

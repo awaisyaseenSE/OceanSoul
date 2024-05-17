@@ -258,7 +258,10 @@ const FilterHomeCompoModal = ({
               <TouchableOpacity
                 style={styles.row}
                 activeOpacity={0.6}
-                onPress={() => setIsCountryShow(!isCountryShow)}>
+                onPress={() => {
+                  setIsCountryShow(!isCountryShow);
+                  setIsCategoryShow(false);
+                }}>
                 <Text
                   style={[
                     styles.heading,
@@ -289,7 +292,10 @@ const FilterHomeCompoModal = ({
               <TouchableOpacity
                 style={styles.row}
                 activeOpacity={0.6}
-                onPress={() => setIsCategoryShow(!isCategoryShow)}>
+                onPress={() => {
+                  setIsCategoryShow(!isCategoryShow);
+                  setIsCountryShow(false);
+                }}>
                 <Text
                   style={[
                     styles.heading,

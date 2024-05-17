@@ -8,6 +8,7 @@ import WishListScreen from '../screens/WishListScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import SettingScreen from '../screens/SettingScreen';
+import DrawerView from './DrawerView';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -15,130 +16,132 @@ const BottomTabNavigator = () => {
   const insets = useSafeAreaInsets();
   const isIOS = Platform.OS === 'ios';
   return (
-    <BottomTab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarHideOnKeyboard: true,
-        tabBarActiveTintColor: colors.red,
-        tabBarInactiveTintColor: colors.black,
-        tabBarStyle: {
-          backgroundColor: colors.white_light2,
-          position: 'absolute',
-          bottom: Platform.OS === 'android' ? 0 : insets.bottom - 16,
-          borderTopWidth: 1.2,
-          paddingVertical: 4,
-          height: 60,
-          paddingBottom: isIOS ? 14 : 16,
-          borderColor: colors.gray,
-          alignContent: 'center',
-        },
-      }}>
-      <BottomTab.Screen
-        component={HomeScreen}
-        name="HomeScreen"
-        options={{
-          tabBarLabel: 'Home',
-          tabBarLabelStyle: {
-            textAlign: 'center',
+    <DrawerView>
+      <BottomTab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarHideOnKeyboard: true,
+          tabBarActiveTintColor: colors.red,
+          tabBarInactiveTintColor: colors.black,
+          tabBarStyle: {
+            backgroundColor: colors.white_light2,
+            position: 'absolute',
+            bottom: Platform.OS === 'android' ? 0 : insets.bottom - 16,
+            borderTopWidth: 1.2,
+            paddingVertical: 4,
+            height: 60,
+            paddingBottom: isIOS ? 14 : 16,
+            borderColor: colors.gray,
+            alignContent: 'center',
           },
-          tabBarIcon: ({focused}) => {
-            return (
-              <Image
-                source={require('../assets/home.png')}
-                style={[
-                  styles.iconStyle,
-                  {tintColor: focused ? colors.red : colors.black},
-                ]}
-              />
-            );
-          },
-        }}
-      />
-      <BottomTab.Screen
-        component={WishListScreen}
-        name="WishListScreen"
-        options={{
-          tabBarLabel: 'Wishlist',
-          tabBarLabelStyle: {textAlign: 'center'},
-          tabBarIcon: ({focused}) => {
-            return (
-              <Image
-                source={require('../assets/heart.png')}
-                style={[
-                  styles.iconStyle,
-                  {tintColor: focused ? colors.red : colors.black},
-                ]}
-              />
-            );
-          },
-        }}
-      />
-      <BottomTab.Screen
-        component={ShoppingCartScreen}
-        name="ShoppingCartScreen"
-        options={{
-          tabBarLabel: '',
-
-          tabBarIcon: ({focused}) => {
-            return (
-              <View
-                style={[
-                  styles.shoppingCartContainer,
-                  {
-                    backgroundColor: focused ? colors.red : colors.white,
-                  },
-                ]}>
+        }}>
+        <BottomTab.Screen
+          component={HomeScreen}
+          name="HomeScreen"
+          options={{
+            tabBarLabel: 'Home',
+            tabBarLabelStyle: {
+              textAlign: 'center',
+            },
+            tabBarIcon: ({focused}) => {
+              return (
                 <Image
-                  source={require('../assets/shopping-cart.png')}
+                  source={require('../assets/home.png')}
                   style={[
                     styles.iconStyle,
-                    {tintColor: focused ? colors.white : colors.black},
+                    {tintColor: focused ? colors.red : colors.black},
                   ]}
                 />
-              </View>
-            );
-          },
-        }}
-      />
-      <BottomTab.Screen
-        component={SearchScreen}
-        name="SearchScreen"
-        options={{
-          tabBarLabel: 'Search',
-          tabBarLabelStyle: {textAlign: 'center'},
-          tabBarIcon: ({focused}) => {
-            return (
-              <Image
-                source={require('../assets/search.png')}
-                style={[
-                  styles.iconStyle,
-                  {tintColor: focused ? colors.red : colors.black},
-                ]}
-              />
-            );
-          },
-        }}
-      />
-      <BottomTab.Screen
-        component={SettingScreen}
-        name="SettingScreen"
-        options={{
-          tabBarLabel: 'Setting',
-          tabBarLabelStyle: {textAlign: 'center'},
-          tabBarIcon: ({focused}) => {
-            return (
-              <Image
-                source={require('../assets/settings.png')}
-                style={[
-                  styles.iconStyle,
-                  {tintColor: focused ? colors.red : colors.black},
-                ]}
-              />
-            );
-          },
-        }}
-      />
-    </BottomTab.Navigator>
+              );
+            },
+          }}
+        />
+        <BottomTab.Screen
+          component={WishListScreen}
+          name="WishListScreen"
+          options={{
+            tabBarLabel: 'Wishlist',
+            tabBarLabelStyle: {textAlign: 'center'},
+            tabBarIcon: ({focused}) => {
+              return (
+                <Image
+                  source={require('../assets/heart.png')}
+                  style={[
+                    styles.iconStyle,
+                    {tintColor: focused ? colors.red : colors.black},
+                  ]}
+                />
+              );
+            },
+          }}
+        />
+        <BottomTab.Screen
+          component={ShoppingCartScreen}
+          name="ShoppingCartScreen"
+          options={{
+            tabBarLabel: '',
+
+            tabBarIcon: ({focused}) => {
+              return (
+                <View
+                  style={[
+                    styles.shoppingCartContainer,
+                    {
+                      backgroundColor: focused ? colors.red : colors.white,
+                    },
+                  ]}>
+                  <Image
+                    source={require('../assets/shopping-cart.png')}
+                    style={[
+                      styles.iconStyle,
+                      {tintColor: focused ? colors.white : colors.black},
+                    ]}
+                  />
+                </View>
+              );
+            },
+          }}
+        />
+        <BottomTab.Screen
+          component={SearchScreen}
+          name="SearchScreen"
+          options={{
+            tabBarLabel: 'Search',
+            tabBarLabelStyle: {textAlign: 'center'},
+            tabBarIcon: ({focused}) => {
+              return (
+                <Image
+                  source={require('../assets/search.png')}
+                  style={[
+                    styles.iconStyle,
+                    {tintColor: focused ? colors.red : colors.black},
+                  ]}
+                />
+              );
+            },
+          }}
+        />
+        <BottomTab.Screen
+          component={SettingScreen}
+          name="SettingScreen"
+          options={{
+            tabBarLabel: 'Setting',
+            tabBarLabelStyle: {textAlign: 'center'},
+            tabBarIcon: ({focused}) => {
+              return (
+                <Image
+                  source={require('../assets/settings.png')}
+                  style={[
+                    styles.iconStyle,
+                    {tintColor: focused ? colors.red : colors.black},
+                  ]}
+                />
+              );
+            },
+          }}
+        />
+      </BottomTab.Navigator>
+    </DrawerView>
   );
 };
 

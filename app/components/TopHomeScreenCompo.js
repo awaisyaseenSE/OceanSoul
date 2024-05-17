@@ -3,6 +3,7 @@ import React from 'react';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
 import FastImage from 'react-native-fast-image';
+import constants from '../constants/constants';
 
 const TopHomeScreenCompo = ({onPressLeft, onPressRight}) => {
   return (
@@ -14,7 +15,7 @@ const TopHomeScreenCompo = ({onPressLeft, onPressRight}) => {
       <TouchableOpacity onPress={onPressRight}>
         <FastImage
           source={{
-            uri: 'https://cdn.pixabay.com/photo/2017/03/27/13/28/man-2178721_1280.jpg',
+            uri: constants.userProfileImageURl,
           }}
           style={styles.profileImage}
         />

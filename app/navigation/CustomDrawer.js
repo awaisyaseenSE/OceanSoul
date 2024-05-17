@@ -1,43 +1,70 @@
 import React from 'react';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-import {View, Text, Platform, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+  StatusBar,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import DrawerItemListCompo from './DrawerItemListCompo';
 import navigationStrings from './navigationStrings';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
 import FastImage from 'react-native-fast-image';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import constants from '../constants/constants';
 
 function CustomDrawer(props) {
   const navigation = useNavigation();
+  const insect = useSafeAreaInsets();
 
   return (
     <>
+      <ImageBackground
+        source={{
+          // uri: 'https://t3.ftcdn.net/jpg/04/55/53/78/360_F_455537818_2AwVoujHe2gH7IRYTgrZ932Nt4MdwTXD.jpg',
+          uri: 'https://t4.ftcdn.net/jpg/06/44/52/09/360_F_644520910_0qAcxInM49OxJaDZ4lhmh3TmHEIj4sOr.jpg',
+        }}
+        style={{width: '100%', height: 200, backgroundColor: colors.gray}}>
+        <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.4)'}}>
+          <View
+            style={{
+              paddingTop: Platform.OS === 'ios' ? insect.top : 10,
+              paddingHorizontal: 12,
+            }}>
+            <FastImage
+              source={{uri: constants.userProfileImageURl}}
+              style={styles.profileImage}
+            />
+            <Text style={styles.userNameText}>Muhammad Awais</Text>
+            <Text
+              style={[
+                styles.userNameText,
+                {
+                  marginTop: 6,
+                  color: colors.gray_light,
+                },
+              ]}>
+              awaisyaseen.se@gmail.com
+            </Text>
+          </View>
+        </View>
+      </ImageBackground>
       <DrawerContentScrollView
         style={{
           backgroundColor: colors.gray_light,
           width: '100%',
-          paddingHorizontal: 12,
         }}
         showsVerticalScrollIndicator={false}>
-        <View style={{flexDirection: 'row'}}>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate(navigationStrings.ProfileScreen)
-            }>
-            <FastImage
-              source={require('../assets/user-image.png')}
-              style={styles.profileImage}
-            />
-          </TouchableOpacity>
-        </View>
-        <Text
-          style={[
-            styles.userNameText,
-            {marginTop: Platform.OS === 'android' ? 10 : 0},
-          ]}>
-          Muhammad Awais
-        </Text>
+        <View
+          style={{
+            backgroundColor: 'red',
+            marginTop: Platform.OS === 'ios' ? -insect.top : 0,
+          }}></View>
         <View style={{flex: 1, marginTop: 18}}>
           <DrawerItemListCompo
             image={require('../assets/apple.png')}
@@ -46,27 +73,13 @@ function CustomDrawer(props) {
           />
         </View>
       </DrawerContentScrollView>
-      <View
-        style={{
-          paddingVertical: 24,
-          paddingHorizontal: 12,
-          backgroundColor: colors.grayBg,
-          shadowColor: colors.black,
-          shadowOffset: {
-            width: 0,
-            height: 5,
-          },
-          shadowOpacity: 0.36,
-          shadowRadius: 6.68,
-
-          elevation: 11,
-        }}>
+      <View style={styles.drawerFooter}>
         <DrawerItemListCompo
-          image={require('../assets/lock.png')}
-          title="Security & Privacy"
+          image={require('../assets/exit.png')}
+          title="Logout"
           style={{marginBottom: Platform.OS === 'ios' ? 8 : 2}}
-          txtStyle={{color: colors.lineColor}}
-          iconStyle={{tintColor: colors.lineColor}}
+          txtStyle={{color: colors.black, fontFamily: fontFamily.semi_bold}}
+          iconStyle={{tintColor: colors.black}}
         />
       </View>
     </>
@@ -76,9 +89,8 @@ function CustomDrawer(props) {
 const styles = StyleSheet.create({
   userNameText: {
     fontSize: 14,
-    color: colors.lineColor,
-    fontFamily: fontFamily.rubik_medium,
-    marginTop: 20,
+    color: colors.white,
+    fontFamily: fontFamily.semi_bold,
   },
   profileImage: {
     width: 60,
@@ -86,6 +98,21 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginTop: 12,
     marginBottom: 20,
+    borderWidth: 1,
+    borderColor: colors.white,
+  },
+  drawerFooter: {
+    paddingVertical: 24,
+    backgroundColor: colors.white_light2,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+
+    elevation: 11,
   },
 });
 

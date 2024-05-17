@@ -11,6 +11,7 @@ import TrendingProductsScreen from '../screens/offers/TrendingProductsScreen';
 import NewArrivalProductsScreen from '../screens/offers/NewArrivalProductsScreen';
 import CustomDrawer from './CustomDrawer';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
+import colors from '../styles/colors';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -20,6 +21,7 @@ const {width, height} = Dimensions.get('window');
 const DrawerNavigator = () => (
   <>
     <Drawer.Navigator
+      drawerType="slide"
       // initialRouteName="TabRoutes"
       // screenOptions={{
       //   headerShown: false,
@@ -34,6 +36,7 @@ const DrawerNavigator = () => (
         },
         sceneContainerStyle: {
           // backgroundColor: '#FFFFFF33',
+          backgroundColor: colors.gray_light,
         },
         swipeEdgeWidth: Platform.OS === 'android' && 100,
         headerShown: false,
@@ -45,11 +48,6 @@ const DrawerNavigator = () => (
         overlayColor: 'transparent',
       }}
       drawerContent={props => <CustomDrawer {...props} />}>
-      {/* <Drawer.Screen
-        name="TabRoutes"
-        component={TabRoutes}
-        options={{headerShown: false}}
-      /> */}
       <Drawer.Screen
         name="BottomTabNavigator"
         component={BottomTabNavigator}

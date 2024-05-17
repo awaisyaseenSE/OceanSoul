@@ -6,9 +6,12 @@ import {getValue} from './app/helper/storeAndGetAsyncStorageValue';
 import constants from './app/constants/constants';
 import AuthNavigator from './app/navigation/AuthNavigator';
 import MainNavigator from './app/navigation/MainNavigator';
+import {LogBox} from 'react-native';
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
+  LogBox.ignoreAllLogs();
+  console.disableYellowBox = true;
 
   useEffect(() => {
     checkOnBoarding();
