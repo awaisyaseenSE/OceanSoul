@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 16,
-    fontFamily: fontFamily.medium,
+    fontSize: 18,
+    fontFamily: fontFamily.semi_bold,
     marginLeft: 12,
     color: colors.black,
   },

@@ -170,6 +170,7 @@ export default function HomeScreen() {
           <View style={{marginVertical: 32}} />
         </View>
       </ScreenComponent>
+
       {showSortedByModal && (
         <SortedByCompoModal
           show={showSortedByModal}

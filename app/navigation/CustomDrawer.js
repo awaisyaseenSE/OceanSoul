@@ -1,15 +1,6 @@
 import React from 'react';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-import {
-  View,
-  Text,
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-  ImageBackground,
-  StatusBar,
-} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {View, Text, Platform, StyleSheet, ImageBackground} from 'react-native';
 import DrawerItemListCompo from './DrawerItemListCompo';
 import navigationStrings from './navigationStrings';
 import colors from '../styles/colors';
@@ -18,8 +9,7 @@ import FastImage from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import constants from '../constants/constants';
 
-function CustomDrawer(props) {
-  const navigation = useNavigation();
+function CustomDrawer({navigation}) {
   const insect = useSafeAreaInsets();
 
   return (
@@ -67,9 +57,20 @@ function CustomDrawer(props) {
           }}></View>
         <View style={{flex: 1, marginTop: 18}}>
           <DrawerItemListCompo
-            image={require('../assets/apple.png')}
-            title="Get Offer's"
-            onPress={() => {}}
+            image={require('../assets/user.png')}
+            title="Profile"
+            onPress={() => {
+              navigation.navigate(navigationStrings.ProfileScreen);
+              navigation.closeDrawer();
+            }}
+          />
+          <DrawerItemListCompo
+            image={require('../assets/check-out.png')}
+            title="Checkout Detail"
+            onPress={() => {
+              navigation.navigate(navigationStrings.CheckoutScreen);
+              navigation.closeDrawer();
+            }}
           />
         </View>
       </DrawerContentScrollView>

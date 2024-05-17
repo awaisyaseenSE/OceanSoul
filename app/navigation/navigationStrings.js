@@ -10,4 +10,5 @@ export default {
   TrendingProductsScreen: 'TrendingProductsScreen',
   NewArrivalProductsScreen: 'NewArrivalProductsScreen',
   ProfileScreen: 'ProfileScreen',
+  CheckoutScreen: 'CheckoutScreen',
 };

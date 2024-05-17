@@ -12,6 +12,7 @@ import NewArrivalProductsScreen from '../screens/offers/NewArrivalProductsScreen
 import CustomDrawer from './CustomDrawer';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
 import colors from '../styles/colors';
+import CheckoutScreen from '../screens/CheckoutScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -101,6 +102,13 @@ export default function AppNavigator() {
         <Stack.Screen
           name="ProfileScreen"
           component={ProfileScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="CheckoutScreen"
+          component={CheckoutScreen}
           options={{
             headerShown: false,
           }}
