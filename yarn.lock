@@ -3080,6 +3080,7 @@ __metadata:
     react-native: 0.72.6
     react-native-date-picker: ^4.3.6
     react-native-document-picker: ^9.1.0
+    react-native-drop-shadow: ^1.0.0
     react-native-fast-image: ^8.6.3
     react-native-gesture-handler: ^2.16.2
     react-native-image-picker: ^7.1.0
@@ -8731,6 +8732,16 @@ __metadata:
     react-native-windows:
       optional: true
   checksum: 51fc0eb75f35f7834904a806c053ac0173799141d0f5a8022cbd9d961b8b715847cba6f15eca78673c36dbc63d2ef2696332508a983d9f929c017cf0ec3d197b
+  languageName: node
+  linkType: hard
+
+"react-native-drop-shadow@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-native-drop-shadow@npm:1.0.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 86cd622d12226e0d609414577988fff72220d6acc5756d26501f2d43c9647314541d67df8f06355e17215ff118476416b149b6317251d2e7aec6ed89bf328e92
   languageName: node
   linkType: hard
 

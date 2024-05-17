@@ -3,6 +3,7 @@ import React from 'react';
 import colors from '../styles/colors';
 import {useNavigation} from '@react-navigation/native';
 import fontFamily from '../styles/fontFamily';
+import DropShadow from 'react-native-drop-shadow';
 
 const ProfileTopCompo = ({title = '', onPress}) => {
   const navigation = useNavigation();
@@ -11,12 +12,14 @@ const ProfileTopCompo = ({title = '', onPress}) => {
   }
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.backIconContainer}
-        activeOpacity={0.8}
-        onPress={onPress}>
-        <Image source={require('../assets/back.png')} style={styles.icon} />
-      </TouchableOpacity>
+      <DropShadow style={styles.shadowStyle}>
+        <TouchableOpacity
+          style={styles.backIconContainer}
+          activeOpacity={0.8}
+          onPress={onPress}>
+          <Image source={require('../assets/back.png')} style={styles.icon} />
+        </TouchableOpacity>
+      </DropShadow>
       <Text style={styles.heading}>{title}</Text>
       <View
         style={[styles.backIconContainer, {backgroundColor: 'transparent'}]}
@@ -42,15 +45,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1.5,
     borderColor: colors.gray_light,
-    shadowColor: colors.gray,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
   },
   icon: {
     width: 16,
@@ -63,6 +57,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: fontFamily.semi_bold,
     color: colors.black,
+  },
+  shadowStyle: {
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
 

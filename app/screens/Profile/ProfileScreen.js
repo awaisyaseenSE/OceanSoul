@@ -9,6 +9,7 @@ import {
   Keyboard,
   Alert,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
 import ScreenComponent from '../../components/ScreenComponent';
@@ -18,11 +19,15 @@ import TextInputWithLeftIconCompo from '../../components/TextInputWithLeftIconCo
 import ButtonComponent from '../../components/ButtonComponent';
 import fontFamily from '../../styles/fontFamily';
 import {validateEmail, validatePhoneNumber} from '../../helper/validation';
+import FastImage from 'react-native-fast-image';
+import {pickImage} from '../../helper/mediaPicker';
+import constants from '../../constants/constants';
 
 export default function ProfileScreen() {
   const [name, setName] = useState('Muhammad Awais');
   const [email, setEmail] = useState('awaisyaseen.se@gmail.com');
   const [phone, setPhone] = useState('923085449343');
+  const [userImg, setUserImg] = useState('');
 
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -55,6 +60,9 @@ export default function ProfileScreen() {
           setPhoneError('');
           phoneValidate = true;
         }
+      } else {
+        setPhoneError('');
+        phoneValidate = true;
       }
 
       if (validateEmail(email) && name.length > 0 && phoneValidate) {
@@ -62,6 +70,17 @@ export default function ProfileScreen() {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleImagePicker = async () => {
+    try {
+      let res = await pickImage('photo');
+      if (!!res) {
+        setUserImg(res?.uri);
+      }
+    } catch (error) {
+      console.log('Error in picking image: ', error);
     }
   };
 
@@ -76,10 +95,14 @@ export default function ProfileScreen() {
                 source={require('../../assets/wave.png')}
                 style={styles.image}
               />
-              <View style={{marginTop: -80}}>
-                <Image
+              <TouchableOpacity
+                style={{marginTop: -80}}
+                activeOpacity={0.6}
+                onPress={handleImagePicker}>
+                <FastImage
                   source={{
-                    uri: 'https://cdn.pixabay.com/photo/2017/03/27/13/28/man-2178721_1280.jpg',
+                    uri:
+                      userImg !== '' ? userImg : constants.userProfileImageURl,
                   }}
                   style={styles.userImg}
                 />
@@ -89,7 +112,7 @@ export default function ProfileScreen() {
                     style={styles.cameraIcon}
                   />
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
             <KeyboardAvoidingView
               behavior={Platform.OS === 'ios' ? 'padding' : null}
@@ -113,15 +136,13 @@ export default function ProfileScreen() {
                       }
                     }}
                     maxLength={40}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
                     clearIcon={name.length > 0 ? 'Clear' : ''}
                     onPressClear={() => setName('')}
                     placeholder={'Your Name'}
                     placeholderTextColor="gray"
                   />
                   {nameError !== '' && (
-                    <Text style={styles.error}>{emailError}</Text>
+                    <Text style={styles.error}>{nameError}</Text>
                   )}
                   <TextInputWithLeftIconCompo
                     inputStyle={{
@@ -141,6 +162,8 @@ export default function ProfileScreen() {
                         setEmail('');
                       }
                     }}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
                     maxLength={40}
                     placeholder={'Your Email Address'}
                     placeholderTextColor="gray"
@@ -170,8 +193,8 @@ export default function ProfileScreen() {
                     placeholder={'Your Phone'}
                     placeholderTextColor="gray"
                   />
-                  {emailError !== '' && (
-                    <Text style={styles.error}>{emailError}</Text>
+                  {phoneError !== '' && (
+                    <Text style={styles.error}>{phoneError}</Text>
                   )}
                 </View>
               </ScrollView>
@@ -223,6 +246,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.red_dark2,
     borderRadius: 22,
     height: 50,
+    marginBottom: Platform.OS === 'android' ? 14 : 0,
   },
   btnTxt: {
     fontFamily: fontFamily.semi_bold,
