@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
 import FastImage from 'react-native-fast-image';
@@ -11,11 +11,15 @@ import MapView, {
   PROVIDER_GOOGLE,
   Polyline,
 } from 'react-native-maps';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import constants from '../constants/constants';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 export default function ShoppingCartScreen() {
+  const mapRef = useRef(null);
+
   const [longLat, setLongLat] = useState({
     latitude: 24.806183284627817,
     longitude: 67.05834424320712,
@@ -37,18 +41,73 @@ export default function ShoppingCartScreen() {
     );
   };
 
+  const moveToLocation = (lati, longi) => {
+    mapRef?.current?.animateToRegion(
+      {
+        latitude: lati,
+        longitude: longi,
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121,
+      },
+      2000,
+    );
+  };
+
   return (
     <>
       <ScreenComponent style={{backgroundColor: colors.white_light2}}>
         <View style={styles.mainContainer}>
-          <Text style={styles.heading}>Google Map</Text>
+          {/* <Text style={styles.heading}>Google Map</Text> */}
+
           <View style={styles.container}>
+            <View
+              style={{
+                position: 'absolute',
+                top: 10,
+                zIndex: 1,
+                width: '94%',
+                height: 300,
+                alignSelf: 'center',
+                // backgroundColor: colors.grayBg,
+              }}>
+              <GooglePlacesAutocomplete
+                placeholder="Search Places..."
+                onPress={(data, details = null) => {
+                  let finalData = JSON.stringify(details?.geometry?.location);
+                  moveToLocation(
+                    details?.geometry?.location?.lat,
+                    details?.geometry?.location?.lng,
+                  );
+                }}
+                query={{
+                  key: constants.google_Map_API_KEY,
+                  language: 'en',
+                }}
+                fetchDetails={true}
+                styles={{
+                  textInputContainer: {
+                    backgroundColor: colors.white_light2,
+                  },
+                  textInput: {
+                    height: 48,
+                    color: '#5d5d5d',
+                    fontSize: 16,
+                    backgroundColor: colors.gray2,
+                  },
+                  predefinedPlacesDescription: {
+                    color: '#1fafef',
+                  },
+                }}
+                onFail={error => console.log(error)}
+              />
+            </View>
             <MapView
-              provider={PROVIDER_GOOGLE} // remove if not using Google Maps
+              ref={mapRef}
+              provider={PROVIDER_GOOGLE}
               style={styles.map}
               region={{
-                latitude: 24.8607,
-                longitude: 67.0011,
+                latitude: longLat.latitude,
+                longitude: longLat.longitude,
                 latitudeDelta: 0.2,
                 longitudeDelta: 0.2,
               }}>
