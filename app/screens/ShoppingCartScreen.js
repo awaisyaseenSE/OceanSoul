@@ -13,6 +13,7 @@ import MapView, {
 } from 'react-native-maps';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import constants from '../constants/constants';
+import MapViewDirections from 'react-native-maps-directions';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -51,6 +52,12 @@ export default function ShoppingCartScreen() {
       },
       2000,
     );
+  };
+
+  const origin = {latitude: 24.80939634617301, longitude: 67.03728320440523};
+  const destination = {
+    latitude: 24.808402999137794,
+    longitude: 67.03923585252838,
   };
 
   return (
@@ -108,8 +115,8 @@ export default function ShoppingCartScreen() {
               region={{
                 latitude: longLat.latitude,
                 longitude: longLat.longitude,
-                latitudeDelta: 0.2,
-                longitudeDelta: 0.2,
+                latitudeDelta: 40,
+                longitudeDelta: 40,
               }}>
               <Marker
                 draggable
@@ -148,6 +155,11 @@ export default function ShoppingCartScreen() {
                 ]}
                 strokeColor={colors.red_dark}
                 strokeWidth={2}
+              />
+              <MapViewDirections
+                origin={origin}
+                destination={destination}
+                apikey={constants.google_Map_API_KEY}
               />
             </MapView>
           </View>
