@@ -2,11 +2,14 @@
 #import <Firebase.h>
 
 #import <React/RCTBundleURLProvider.h>
+#import <GoogleMaps/GoogleMaps.h>
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyD4kqu-keSJ-JXdGKuhFlg8GWhREYwoNZw"];
   [FIRApp configure];
   self.moduleName = @"OceanSoul";
   // You can add your custom initial props in the dictionary below.

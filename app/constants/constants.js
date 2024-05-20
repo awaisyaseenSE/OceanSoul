@@ -1,5 +1,6 @@
 export default {
   onBoardingStatus: false,
+  google_Map_API_KEY: 'AIzaSyD4kqu-keSJ-JXdGKuhFlg8GWhREYwoNZw',
   userProfileImageURl:
     'https://cdn.pixabay.com/photo/2017/03/27/13/28/man-2178721_1280.jpg',
   // rapid_API_KEY: '5f75410f4emshf143142155a6dd7p101489jsn46223137d60a',  // email awaisyaseen1947@gmail.com
