@@ -26,14 +26,53 @@ export default function CheckoutScreen() {
   const [email, setEmail] = useState('awaisyaseen.se@gmail.com');
   const [phone, setPhone] = useState('923085449343');
   const navigation = useNavigation();
+
   const [pinCode, setPinCode] = useState('');
+  const [pinCodeError, setPinCodeError] = useState('');
+
   const [address, setAddress] = useState('');
+  const [addressError, setAddressError] = useState('');
+
   const [city, setCity] = useState('');
+  const [cityError, setCityError] = useState('');
+
   const [state, setState] = useState('');
+  const [stateError, setStateError] = useState('');
   const [country, setCountry] = useState('');
+  const [countryError, setCountryError] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
+  const [accountNumberError, setAccountNumberError] = useState('');
   const [accountHolderName, setAccountHolderName] = useState('');
+  const [accountHolderNameError, setAccountHolderNameError] = useState('');
   const [ifscCode, setIfscCode] = useState('');
+  const [ifscCodeError, setIfscCodeError] = useState('');
+
+  const handleUpdateCheckoutDetail = () => {
+    if (pinCode === '') {
+      setPinCodeError('Postal code is requried!');
+    } else {
+      setPinCodeError('');
+    }
+    if (address === '') {
+      setAddressError('Address is requried!');
+    } else {
+      if (address.length < 3) {
+        setAddressError('Address is invalid!');
+      } else {
+        setAddressError('');
+      }
+    }
+    if (city === 3) {
+      setCityError('City name is requried!');
+    } else {
+      if (city.length < 3) {
+        setCityError('City name is invalid!');
+      } else {
+        setCityError('');
+      }
+    }
+  };
+
   return (
     <ScreenComponent>
       <TopCompoWithHeading title="Checkout" />
@@ -223,6 +262,7 @@ export default function CheckoutScreen() {
                 title="Save"
                 style={styles.btn}
                 textStyle={styles.btnTxt}
+                onPress={handleUpdateCheckoutDetail}
               />
               <View
                 style={{marginVertical: Platform.OS === 'android' ? 12 : 4}}
