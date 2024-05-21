@@ -38,20 +38,29 @@ export default function CheckoutScreen() {
 
   const [state, setState] = useState('');
   const [stateError, setStateError] = useState('');
+
   const [country, setCountry] = useState('');
   const [countryError, setCountryError] = useState('');
+
   const [accountNumber, setAccountNumber] = useState('');
   const [accountNumberError, setAccountNumberError] = useState('');
+
   const [accountHolderName, setAccountHolderName] = useState('');
   const [accountHolderNameError, setAccountHolderNameError] = useState('');
+
   const [ifscCode, setIfscCode] = useState('');
   const [ifscCodeError, setIfscCodeError] = useState('');
 
   const handleUpdateCheckoutDetail = () => {
+    let isNumericPostalCode = /^\d+$/.test(pinCode);
     if (pinCode === '') {
       setPinCodeError('Postal code is requried!');
     } else {
-      setPinCodeError('');
+      if (pinCode.length < 5 || !isNumericPostalCode) {
+        setPinCodeError('Postal code is invalid!');
+      } else {
+        setPinCodeError('');
+      }
     }
     if (address === '') {
       setAddressError('Address is requried!');
@@ -62,14 +71,79 @@ export default function CheckoutScreen() {
         setAddressError('');
       }
     }
-    if (city === 3) {
+
+    let isCityAlphabetic = /^[A-Za-z\s]+$/.test(city);
+
+    if (city === '') {
       setCityError('City name is requried!');
     } else {
-      if (city.length < 3) {
+      if (city.length < 3 || !isCityAlphabetic) {
         setCityError('City name is invalid!');
       } else {
         setCityError('');
       }
+    }
+
+    let isStateAlphabetic = /^[A-Za-z\s]+$/.test(state);
+    if (state === '') {
+      setStateError('State name is requried!');
+    } else {
+      if (state.length < 3 || !isStateAlphabetic) {
+        setStateError('State name is invalid!');
+      } else {
+        setStateError('');
+      }
+    }
+
+    let isCountryAlphabetic = /^[A-Za-z\s]+$/.test(country);
+
+    if (country === '') {
+      setCountryError('Country name is requried!');
+    } else {
+      if (country.length < 4 || !isCountryAlphabetic) {
+        setCountryError('Country name is invalid!');
+      } else {
+        setCountryError('');
+      }
+    }
+
+    if (accountNumber === '') {
+      setAccountNumberError('Account number is requried!');
+    } else {
+      if (accountNumber.length < 3) {
+        setAccountNumberError('Account number is invalid!');
+      } else {
+        setAccountNumberError('');
+      }
+    }
+
+    let isAccountNameAlphabetic = /^[A-Za-z\s]+$/.test(accountHolderName);
+
+    if (accountHolderName === '') {
+      setAccountHolderNameError('Account holder name is requried!');
+    } else {
+      if (accountHolderName.length < 3 || !isAccountNameAlphabetic) {
+        setAccountHolderNameError('Account holder name is invalid!');
+      } else {
+        setAccountHolderNameError('');
+      }
+    }
+
+    if (
+      pinCode.length > 4 &&
+      isNumericPostalCode &&
+      address.length > 2 &&
+      city.length > 2 &&
+      isCityAlphabetic &&
+      state.length > 2 &&
+      isStateAlphabetic &&
+      country.length > 3 &&
+      isCountryAlphabetic &&
+      accountNumber.length > 2 &&
+      accountHolderName.length > 2 &&
+      isAccountNameAlphabetic
+    ) {
+      Alert.alert('All is well!');
     }
   };
 
@@ -136,7 +210,11 @@ export default function CheckoutScreen() {
               </Text>
               <Text style={styles.label}>Postal Code</Text>
               <TextInputWithLeftIconCompo
-                inputStyle={styles.inputColor}
+                inputStyle={{
+                  ...styles.inputColor,
+                  borderColor: pinCodeError !== '' ? colors.red : colors.gray,
+                  marginBottom: pinCodeError !== '' ? 4 : 14,
+                }}
                 value={pinCode}
                 onChangeText={text => {
                   if (text.trim().length) {
@@ -149,9 +227,16 @@ export default function CheckoutScreen() {
                 placeholder={'Postal Code'}
                 placeholderTextColor="gray"
               />
+              {pinCodeError !== '' && (
+                <Text style={styles.error}>{pinCodeError}</Text>
+              )}
               <Text style={styles.label}>Address</Text>
               <TextInputWithLeftIconCompo
-                inputStyle={styles.inputColor}
+                inputStyle={{
+                  ...styles.inputColor,
+                  borderColor: addressError !== '' ? colors.red : colors.gray,
+                  marginBottom: addressError !== '' ? 4 : 14,
+                }}
                 value={address}
                 onChangeText={text => {
                   if (text.trim().length) {
@@ -164,9 +249,16 @@ export default function CheckoutScreen() {
                 placeholder={'Address'}
                 placeholderTextColor="gray"
               />
+              {addressError !== '' && (
+                <Text style={styles.error}>{addressError}</Text>
+              )}
               <Text style={styles.label}>City</Text>
               <TextInputWithLeftIconCompo
-                inputStyle={styles.inputColor}
+                inputStyle={{
+                  ...styles.inputColor,
+                  borderColor: cityError !== '' ? colors.red : colors.gray,
+                  marginBottom: cityError !== '' ? 4 : 14,
+                }}
                 value={city}
                 onChangeText={text => {
                   if (text.trim().length) {
@@ -179,9 +271,16 @@ export default function CheckoutScreen() {
                 placeholder={'City'}
                 placeholderTextColor="gray"
               />
+              {cityError !== '' && (
+                <Text style={styles.error}>{cityError}</Text>
+              )}
               <Text style={styles.label}>State</Text>
               <TextInputWithLeftIconCompo
-                inputStyle={styles.inputColor}
+                inputStyle={{
+                  ...styles.inputColor,
+                  borderColor: stateError !== '' ? colors.red : colors.gray,
+                  marginBottom: stateError !== '' ? 4 : 14,
+                }}
                 value={state}
                 onChangeText={text => {
                   if (text.trim().length) {
@@ -194,9 +293,16 @@ export default function CheckoutScreen() {
                 placeholder={'State'}
                 placeholderTextColor="gray"
               />
+              {stateError !== '' && (
+                <Text style={styles.error}>{stateError}</Text>
+              )}
               <Text style={styles.label}>Country</Text>
               <TextInputWithLeftIconCompo
-                inputStyle={styles.inputColor}
+                inputStyle={{
+                  ...styles.inputColor,
+                  borderColor: countryError !== '' ? colors.red : colors.gray,
+                  marginBottom: countryError !== '' ? 4 : 14,
+                }}
                 value={country}
                 onChangeText={text => {
                   if (text.trim().length) {
@@ -209,13 +315,21 @@ export default function CheckoutScreen() {
                 placeholder={'Country'}
                 placeholderTextColor="gray"
               />
+              {countryError !== '' && (
+                <Text style={styles.error}>{countryError}</Text>
+              )}
               <View style={styles.line} />
               <Text style={[styles.heading, {marginBottom: 20}]}>
                 Bank Account Details
               </Text>
               <Text style={styles.label}>Account Number</Text>
               <TextInputWithLeftIconCompo
-                inputStyle={styles.inputColor}
+                inputStyle={{
+                  ...styles.inputColor,
+                  borderColor:
+                    accountNumberError !== '' ? colors.red : colors.gray,
+                  marginBottom: accountNumberError !== '' ? 4 : 14,
+                }}
                 value={accountNumber}
                 onChangeText={text => {
                   if (text.trim().length) {
@@ -228,9 +342,17 @@ export default function CheckoutScreen() {
                 placeholder={'Account Number'}
                 placeholderTextColor="gray"
               />
+              {accountNumberError !== '' && (
+                <Text style={styles.error}>{accountNumberError}</Text>
+              )}
               <Text style={styles.label}>Account Holder Name</Text>
               <TextInputWithLeftIconCompo
-                inputStyle={styles.inputColor}
+                inputStyle={{
+                  ...styles.inputColor,
+                  borderColor:
+                    accountHolderNameError !== '' ? colors.red : colors.gray,
+                  marginBottom: accountHolderNameError !== '' ? 4 : 14,
+                }}
                 value={accountHolderName}
                 onChangeText={text => {
                   if (text.trim().length) {
@@ -243,7 +365,10 @@ export default function CheckoutScreen() {
                 placeholder={'Account Holder Name'}
                 placeholderTextColor="gray"
               />
-              <Text style={styles.label}>IFSC Code</Text>
+              {accountHolderNameError !== '' && (
+                <Text style={styles.error}>{accountHolderNameError}</Text>
+              )}
+              <Text style={styles.label}>SWIFT Code</Text>
               <TextInputWithLeftIconCompo
                 inputStyle={styles.inputColor}
                 value={ifscCode}
@@ -255,7 +380,7 @@ export default function CheckoutScreen() {
                   }
                 }}
                 maxLength={40}
-                placeholder={'IFSC Code'}
+                placeholder={'SWIFT Code'}
                 placeholderTextColor="gray"
               />
               <ButtonComponent
@@ -336,5 +461,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
+  },
+  error: {
+    fontSize: 12,
+    fontFamily: fontFamily.semi_bold,
+    color: colors.red_dark2,
+    marginBottom: 14,
+    paddingHorizontal: 4,
   },
 });
