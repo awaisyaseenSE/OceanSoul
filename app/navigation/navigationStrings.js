@@ -11,4 +11,5 @@ export default {
   NewArrivalProductsScreen: 'NewArrivalProductsScreen',
   ProfileScreen: 'ProfileScreen',
   CheckoutScreen: 'CheckoutScreen',
+  PickLocationScreen: 'PickLocationScreen',
 };

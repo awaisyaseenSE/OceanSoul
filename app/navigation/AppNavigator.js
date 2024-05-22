@@ -13,6 +13,7 @@ import CustomDrawer from './CustomDrawer';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
 import colors from '../styles/colors';
 import CheckoutScreen from '../screens/CheckoutScreen';
+import PickLocationScreen from '../screens/Other/PickLocationScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -109,6 +110,13 @@ export default function AppNavigator() {
         <Stack.Screen
           name="CheckoutScreen"
           component={CheckoutScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="PickLocationScreen"
+          component={PickLocationScreen}
           options={{
             headerShown: false,
           }}

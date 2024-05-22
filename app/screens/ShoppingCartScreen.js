@@ -1,4 +1,12 @@
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Button,
+  LogBox,
+} from 'react-native';
 import React, {useRef, useState} from 'react';
 import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
@@ -14,23 +22,31 @@ import MapView, {
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import constants from '../constants/constants';
 import MapViewDirections from 'react-native-maps-directions';
+import ButtonComponent from '../components/ButtonComponent';
+import {useNavigation} from '@react-navigation/native';
+import navigationStrings from '../navigation/navigationStrings';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 export default function ShoppingCartScreen() {
   const mapRef = useRef(null);
+  const navigation = useNavigation();
 
   const [longLat, setLongLat] = useState({
     latitude: 24.806183284627817,
     longitude: 67.05834424320712,
   });
 
-  const CustomMarker = () => {
+  const CustomMarker = ({img = null, width = 32, height = 32}) => {
+    if (img == null) {
+      img = require('../assets/location.png');
+    }
     return (
       <Image
-        source={require('../assets/location.png')}
-        style={{width: 44, height: 44}}
+        source={img}
+        style={{width: width, height: height, tintColor: colors.green}}
+        resizeMode="contain"
       />
     );
   };
@@ -56,8 +72,36 @@ export default function ShoppingCartScreen() {
 
   const origin = {latitude: 24.80939634617301, longitude: 67.03728320440523};
   const destination = {
-    latitude: 24.808402999137794,
-    longitude: 67.03923585252838,
+    // latitude: 28.3126576248407,
+    // longitude: 70.1264309884104,
+    latitude: 35.32561799768895,
+    longitude: 75.54336378013954,
+  };
+
+  const [pickerVal, setPickerVal] = useState({
+    origin: {latitude: 24.80939634617301, longitude: 67.03728320440523},
+    destination: {
+      latitude: 25.1313229,
+      longitude: 62.3249865,
+    },
+  });
+
+  const handlePickLocation = () => {
+    navigation.navigate(navigationStrings.PickLocationScreen, {
+      setLocationsFun: getValues,
+    });
+  };
+
+  const getValues = values => {
+    if (
+      Object.entries(values?.destination).length === 0 &&
+      Object.entries(values?.origin).length === 0
+    ) {
+      console.log('not values');
+      return null;
+    }
+    console.log('Hello every one this is awais! and values is: ', values);
+    setPickerVal(values);
   };
 
   return (
@@ -72,10 +116,11 @@ export default function ShoppingCartScreen() {
                 position: 'absolute',
                 top: 10,
                 zIndex: 1,
-                width: '94%',
+                width: '100%',
                 height: 300,
                 alignSelf: 'center',
-                // backgroundColor: colors.grayBg,
+                flexDirection: 'row',
+                paddingHorizontal: 12,
               }}>
               <GooglePlacesAutocomplete
                 placeholder="Search Places..."
@@ -94,6 +139,7 @@ export default function ShoppingCartScreen() {
                 styles={{
                   textInputContainer: {
                     backgroundColor: colors.white_light2,
+                    height: 48,
                   },
                   textInput: {
                     height: 48,
@@ -107,6 +153,12 @@ export default function ShoppingCartScreen() {
                 }}
                 onFail={error => console.log(error)}
               />
+              <ButtonComponent
+                title="Pick Location"
+                onPress={() => handlePickLocation()}
+                style={styles.btn}
+                textStyle={styles.btnText}
+              />
             </View>
             <MapView
               ref={mapRef}
@@ -115,10 +167,16 @@ export default function ShoppingCartScreen() {
               region={{
                 latitude: longLat.latitude,
                 longitude: longLat.longitude,
-                latitudeDelta: 40,
-                longitudeDelta: 40,
-              }}>
-              <Marker
+                latitudeDelta: 60,
+                longitudeDelta: 60,
+              }}
+              zoomEnabled={true}
+              scrollEnabled={true}
+              zoomTapEnabled={true}
+              zoomControlEnabled={true}
+              scrollDuringRotateOrZoomEnabled={true}
+              showsMyLocationButton={true}>
+              {/* <Marker
                 draggable
                 coordinate={{
                   latitude: longLat.latitude,
@@ -132,8 +190,8 @@ export default function ShoppingCartScreen() {
                   style={{width: 300, height: 40, backgroundColor: 'white'}}>
                   <CustomMarkerTitle />
                 </Callout>
-              </Marker>
-              <Circle
+              </Marker> */}
+              {/* <Circle
                 center={{
                   latitude: longLat.latitude,
                   longitude: longLat.longitude,
@@ -155,11 +213,37 @@ export default function ShoppingCartScreen() {
                 ]}
                 strokeColor={colors.red_dark}
                 strokeWidth={2}
-              />
+              /> */}
+              <Marker coordinate={pickerVal.origin}>
+                <CustomMarker
+                  img={require('../assets/start-location.png')}
+                  width={22}
+                  height={22}
+                />
+              </Marker>
+
+              <Marker coordinate={pickerVal.destination}>
+                <CustomMarker />
+              </Marker>
+
               <MapViewDirections
-                origin={origin}
-                destination={destination}
+                origin={pickerVal.origin}
+                destination={pickerVal.destination}
                 apikey={constants.google_Map_API_KEY}
+                strokeWidth={3}
+                strokeColor="red"
+                onStart={() => console.log('statiing...')}
+                optimizeWaypoints={true}
+                onReady={result => {
+                  mapRef.current.fitToCoordinates(result.coordinates, {
+                    edgePadding: {
+                      right: screenWidth / 20,
+                      bottom: screenHeight / 20,
+                      left: screenWidth / 20,
+                      top: screenHeight / 20,
+                    },
+                  });
+                }}
               />
             </MapView>
           </View>
@@ -172,6 +256,7 @@ export default function ShoppingCartScreen() {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    marginBottom: 50,
   },
   heading: {
     fontSize: 16,
@@ -187,12 +272,31 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   container: {
-    ...StyleSheet.absoluteFillObject,
+    // ...StyleSheet.absoluteFillObject,
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  icon: {
+    width: 22,
+    height: 22,
+  },
+  btn: {
+    width: '20%',
+    borderRadius: 6,
+    height: 44,
+    marginBottom: 12,
+    marginLeft: 8,
+    backgroundColor: colors.gray2,
+    borderWidth: 1,
+    borderColor: colors.grayBg,
+  },
+  btnText: {
+    fontSize: 12,
+    fontFamily: fontFamily.medium,
+    color: colors.black_light,
   },
 });

@@ -11,14 +11,14 @@ export const homeBannerData = [
     id: 1,
     title: '50-60% OFF',
     desc: `Now in (product)${'\n'}All colours`,
-    img: 'https://img.freepik.com/free-photo/front-view-young-man-checking-his-phone_23-2148316180.jpg?t=st=1715578189~exp=1715581789~hmac=31921999afcdd621a8bb8803242f695a3a2672c7f8d803cb28e3253175ff6f61&w=1800',
+    img: 'https://t4.ftcdn.net/jpg/04/72/44/67/360_F_472446747_AmtV7OdEJVyzVRFsVTjVHhIiFV00bMNr.jpg',
     left: true,
   },
   {
     id: 2,
     title: '40-50% OFF',
     desc: `Now in (product)${'\n'}All colours`,
-    img: 'https://img.freepik.com/free-photo/girl-with-sunglasses-holding-shopping-bags_23-2148286207.jpg?t=st=1715578285~exp=1715581885~hmac=f326b98961423bc56417b08dea175892e7009fa950d80c378ced0f19ffc87f43&w=1800',
+    img: 'https://img.freepik.com/free-photo/happy-young-man-going-shopping-holding-bags-looking-excited-standing-orange-sweater-standing-against-turquoise-wall_1258-23904.jpg',
     left: false,
   },
 ];

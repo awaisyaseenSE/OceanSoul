@@ -20,6 +20,7 @@ import TextInputWithLeftIconCompo from '../components/TextInputWithLeftIconCompo
 import {useNavigation} from '@react-navigation/native';
 import navigationStrings from '../navigation/navigationStrings';
 import ButtonComponent from '../components/ButtonComponent';
+import IBAN from 'iban';
 
 export default function CheckoutScreen() {
   const [name, setName] = useState('Muhammad Awais');
@@ -108,10 +109,10 @@ export default function CheckoutScreen() {
     }
 
     if (accountNumber === '') {
-      setAccountNumberError('Account number is requried!');
+      setAccountNumberError('IBAN number is requried!');
     } else {
-      if (accountNumber.length < 3) {
-        setAccountNumberError('Account number is invalid!');
+      if (!IBAN.isValid(accountNumber)) {
+        setAccountNumberError('IBAN number is invalid!');
       } else {
         setAccountNumberError('');
       }
@@ -139,7 +140,7 @@ export default function CheckoutScreen() {
       isStateAlphabetic &&
       country.length > 3 &&
       isCountryAlphabetic &&
-      accountNumber.length > 2 &&
+      IBAN.isValid(accountNumber) &&
       accountHolderName.length > 2 &&
       isAccountNameAlphabetic
     ) {
@@ -322,7 +323,7 @@ export default function CheckoutScreen() {
               <Text style={[styles.heading, {marginBottom: 20}]}>
                 Bank Account Details
               </Text>
-              <Text style={styles.label}>Account Number</Text>
+              <Text style={styles.label}>IBAN Number</Text>
               <TextInputWithLeftIconCompo
                 inputStyle={{
                   ...styles.inputColor,
@@ -339,7 +340,7 @@ export default function CheckoutScreen() {
                   }
                 }}
                 maxLength={40}
-                placeholder={'Account Number'}
+                placeholder={'IBAN Number'}
                 placeholderTextColor="gray"
               />
               {accountNumberError !== '' && (

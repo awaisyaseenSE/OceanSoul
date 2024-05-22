@@ -11,6 +11,7 @@ import {LogBox} from 'react-native';
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
   LogBox.ignoreAllLogs();
+
   console.disableYellowBox = true;
 
   useEffect(() => {
