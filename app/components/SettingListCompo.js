@@ -5,7 +5,10 @@ import colors from '../styles/colors';
 
 const SettingListCompo = ({title = '', onPress, icon}) => {
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.6}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.6}
+      onPress={onPress}>
       <View style={styles.row}>
         <View style={styles.iconContainer}>
           <Image source={icon} style={styles.icon} />

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
@@ -15,9 +15,47 @@ import {useNavigation} from '@react-navigation/native';
 import navigationStrings from '../navigation/navigationStrings';
 import FastImage from 'react-native-fast-image';
 import constants from '../constants/constants';
+import {getLocation, fetchAddressByCoordinates} from '../helper/getLocation';
+import MyIndicator from '../components/MyIndicator';
 
 export default function SettingScreen() {
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
+
+  const handleGetLocation = async () => {
+    try {
+      setLoading(true);
+      const position = await getLocation();
+      console.log('position is: ', position);
+
+      if (position !== undefined && position !== null) {
+        const latitude = position?.coords?.latitude;
+        const longitude = position?.coords?.longitude;
+        console.log('.....latitude of user is: ', latitude);
+        console.log('.....longitude of user is: ', longitude);
+        await fetchAddressByCoordinates(latitude, longitude);
+
+        // const {city, country} = await getCityAndCountry(
+        //   latitude,
+        //   longitude,
+        // );
+        // console.log('user city: ', city);
+        // console.log('user country: ', country);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log('Error in handleGetLocation in Home screen: ', error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetLocation();
+  }, []);
+
   return (
     <>
       <ScreenComponent style={{backgroundColor: colors.white_light2}}>
@@ -113,6 +151,7 @@ export default function SettingScreen() {
           </View>
         </ScrollView>
       </ScreenComponent>
+      <MyIndicator visible={loading} />
     </>
   );
 }
