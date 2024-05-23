@@ -69,7 +69,7 @@ export default function PickLocationScreen({route}) {
                 );
               }}
               query={{
-                key: constants.google_Map_API_KEY,
+                key: process.env.GOOGLE_MAP_API_KEY,
                 language: 'en',
               }}
               fetchDetails={true}
@@ -102,7 +102,7 @@ export default function PickLocationScreen({route}) {
                 );
               }}
               query={{
-                key: constants.google_Map_API_KEY,
+                key: process.env.GOOGLE_MAP_API_KEY,
                 language: 'en',
               }}
               fetchDetails={true}

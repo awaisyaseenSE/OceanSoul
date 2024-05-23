@@ -15,7 +15,6 @@ import TredingProductsBannerCompo from '../components/TredingProductsBannerCompo
 import HotSummerSaleCompo from '../components/HotSummerSaleCompo';
 import SponseredCompo from '../components/SponseredCompo';
 import HomeSearchDataCompo from '../components/HomeSearchDataCompo';
-import constants from '../constants/constants';
 import SortedByCompoModal from './searchComponents/SortedByCompoModal';
 import FilterHomeCompoModal from './searchComponents/FilterHomeCompoModal';
 import {useNavigation} from '@react-navigation/native';
@@ -63,7 +62,7 @@ export default function HomeScreen() {
     const options = {
       method: 'GET',
       headers: {
-        'X-RapidAPI-Key': constants.rapid_API_KEY,
+        'X-RapidAPI-Key': process.env.RAPID_API_KEY,
         'X-RapidAPI-Host': 'real-time-amazon-data.p.rapidapi.com',
       },
     };

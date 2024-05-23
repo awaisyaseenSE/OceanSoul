@@ -132,7 +132,7 @@ export default function ShoppingCartScreen() {
                   );
                 }}
                 query={{
-                  key: constants.google_Map_API_KEY,
+                  key: process.env.GOOGLE_MAP_API_KEY,
                   language: 'en',
                 }}
                 fetchDetails={true}
@@ -229,7 +229,7 @@ export default function ShoppingCartScreen() {
               <MapViewDirections
                 origin={pickerVal.origin}
                 destination={pickerVal.destination}
-                apikey={constants.google_Map_API_KEY}
+                apikey={process.env.GOOGLE_MAP_API_KEY}
                 strokeWidth={3}
                 strokeColor="red"
                 onStart={() => console.log('statiing...')}

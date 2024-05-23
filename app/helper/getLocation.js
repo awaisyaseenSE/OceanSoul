@@ -90,7 +90,7 @@ export const getLocation = async () => {
 export const fetchAddressByCoordinates = async (latitude, longitude) => {
   try {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${constants.google_Map_API_KEY}`,
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.GOOGLE_MAP_API_KEY}`,
     );
 
     if (!response.ok) {

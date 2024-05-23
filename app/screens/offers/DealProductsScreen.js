@@ -7,7 +7,6 @@ import {
   Dimensions,
   TouchableOpacity,
   Linking,
-  Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import ScreenComponent from '../../components/ScreenComponent';
@@ -15,7 +14,6 @@ import FastImage from 'react-native-fast-image';
 import colors from '../../styles/colors';
 import fontFamily from '../../styles/fontFamily';
 import TopCompoWithHeading from '../../components/TopCompoWithHeading';
-import constants from '../../constants/constants';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -29,7 +27,7 @@ export default function DealProductsScreen() {
       const options = {
         method: 'GET',
         headers: {
-          'X-RapidAPI-Key': constants.rapid_API_KEY,
+          'X-RapidAPI-Key': process.env.RAPID_API_KEY,
           'X-RapidAPI-Host': 'real-time-amazon-data.p.rapidapi.com',
         },
       };
