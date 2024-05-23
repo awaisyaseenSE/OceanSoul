@@ -25,7 +25,7 @@ import constants from '../../constants/constants';
 
 export default function ProfileScreen() {
   const [name, setName] = useState('Muhammad Awais');
-  const [email, setEmail] = useState('awaisyaseen.se@gmail.com');
+  const [email, setEmail] = useState('chawais2001@gmail.com');
   const [phone, setPhone] = useState('923085449343');
   const [userImg, setUserImg] = useState('');
 

@@ -55,7 +55,7 @@ export const getLocation = async () => {
       locationPermission = await requestLocationPermissionIOS();
     }
     if (locationPermission) {
-      Alert.alert('Now you have permission here get location!');
+      // Alert.alert('Now you have permission here get location!');
       //   Geolocation.getCurrentPosition(
       //     position => {
       //       console.log(position);

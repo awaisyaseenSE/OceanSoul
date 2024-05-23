@@ -368,7 +368,7 @@ const FilterHomeCompoModal = ({
                 values={[minPrice, maxPrice]}
                 step={10}
                 min={1}
-                max={500000}
+                max={5000}
                 isMarkersSeparated={true}
                 onValuesChange={values => {
                   setMinPrice(values[0]);

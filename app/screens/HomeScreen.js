@@ -38,7 +38,7 @@ export default function HomeScreen() {
   const [showFilterModal, setShowFilterModal] = useState(false);
 
   const [minPrice, setMinPrice] = useState(1);
-  const [maxPrice, setMaxPrice] = useState(500000);
+  const [maxPrice, setMaxPrice] = useState(5000);
   const [productCondition, setProductCondition] = useState('NEW');
   const [category, setCategory] = useState('aps');
   const navigation = useNavigation();

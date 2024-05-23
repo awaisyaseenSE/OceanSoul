@@ -55,7 +55,7 @@ function CustomDrawer({navigation}) {
                   color: colors.gray_light,
                 },
               ]}>
-              awaisyaseen.se@gmail.com
+              chawais2001@gmail.com
             </Text>
           </View>
         </View>

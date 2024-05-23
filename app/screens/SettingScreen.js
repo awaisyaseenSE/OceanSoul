@@ -99,7 +99,7 @@ export default function SettingScreen() {
                           fontFamily: fontFamily.semi_bold,
                         },
                       ]}>
-                      Awais Yaseen
+                      Hello, Awais
                     </Text>
                     <TouchableOpacity
                       style={styles.btnStyle}
