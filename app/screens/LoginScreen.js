@@ -16,8 +16,10 @@ import colors from '../styles/colors';
 import TextInputWithLeftIconCompo from '../components/TextInputWithLeftIconCompo';
 import ButtonComponent from '../components/ButtonComponent';
 import {validateEmail} from '../helper/validation';
-import {useNavigation} from '@react-navigation/native';
+import {StackActions, useNavigation} from '@react-navigation/native';
 import navigationStrings from '../navigation/navigationStrings';
+import {storeValue} from '../helper/storeAndGetAsyncStorageValue';
+import {useAuth} from '../auth/AuthContext';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -27,8 +29,9 @@ export default function LoginScreen() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const navigation = useNavigation();
+  const {login} = useAuth();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (password === '') {
       setPasswordError('Password is required!');
     } else {
@@ -50,7 +53,9 @@ export default function LoginScreen() {
     }
     try {
       if (validateEmail(email) && password.length > 5) {
-        Alert.alert('Ok');
+        let key = 'login';
+        await storeValue(key, 'true');
+        login();
       }
     } catch (error) {
       console.log('Error while Login: ', error);
@@ -81,6 +86,7 @@ export default function LoginScreen() {
                 }
               }}
               maxLength={320}
+              autoCapitalize="none"
               placeholder="Username or email"
               placeholderTextColor={colors.gray_dark}
               inputStyle={{

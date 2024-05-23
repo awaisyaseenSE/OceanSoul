@@ -7,6 +7,7 @@ import constants from './app/constants/constants';
 import AuthNavigator from './app/navigation/AuthNavigator';
 import MainNavigator from './app/navigation/MainNavigator';
 import {LogBox} from 'react-native';
+import {AuthProvider} from './app/auth/AuthContext';
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(false);
@@ -33,5 +34,15 @@ export default function App() {
     }
   };
 
-  return <>{splashDone ? <MainNavigator /> : <SplashScreen />}</>;
+  return (
+    <>
+      {splashDone ? (
+        <AuthProvider>
+          <MainNavigator />
+        </AuthProvider>
+      ) : (
+        <SplashScreen />
+      )}
+    </>
+  );
 }

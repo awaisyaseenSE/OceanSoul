@@ -8,9 +8,25 @@ import fontFamily from '../styles/fontFamily';
 import FastImage from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import constants from '../constants/constants';
+import {removeItemValue} from '../helper/storeAndGetAsyncStorageValue';
+import {useAuth} from '../auth/AuthContext';
 
 function CustomDrawer({navigation}) {
   const insect = useSafeAreaInsets();
+  const {logout} = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      let key = 'login';
+      let res = await removeItemValue(key);
+      if (res) {
+        console.log('logut !');
+        logout();
+      }
+    } catch (error) {
+      console.log('Error while Logout: ', error);
+    }
+  };
 
   return (
     <>
@@ -81,6 +97,7 @@ function CustomDrawer({navigation}) {
           style={{marginBottom: Platform.OS === 'ios' ? 8 : 2}}
           txtStyle={{color: colors.black, fontFamily: fontFamily.semi_bold}}
           iconStyle={{tintColor: colors.black}}
+          onPress={handleLogout}
         />
       </View>
     </>
