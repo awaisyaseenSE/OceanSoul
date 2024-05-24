@@ -22,6 +22,7 @@
     "iban": "^0.0.14",
     "react": "18.2.0",
     "react-native": "0.72.6",
+    "react-native-config": "^1.5.1",
     "react-native-date-picker": "^4.3.6",
     "react-native-document-picker": "^9.1.0",
     "react-native-dotenv": "^3.4.11",

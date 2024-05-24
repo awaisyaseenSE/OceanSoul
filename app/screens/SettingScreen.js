@@ -21,7 +21,6 @@ import MyIndicator from '../components/MyIndicator';
 export default function SettingScreen() {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
-
   const handleGetLocation = async () => {
     try {
       setLoading(true);
