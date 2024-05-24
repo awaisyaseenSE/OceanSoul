@@ -17,6 +17,7 @@ import FastImage from 'react-native-fast-image';
 import constants from '../constants/constants';
 import {getLocation, fetchAddressByCoordinates} from '../helper/getLocation';
 import MyIndicator from '../components/MyIndicator';
+import {removeItemValue} from '../helper/storeAndGetAsyncStorageValue';
 
 export default function SettingScreen() {
   const navigation = useNavigation();
@@ -52,8 +53,20 @@ export default function SettingScreen() {
   };
 
   useEffect(() => {
-    handleGetLocation();
+    // handleGetLocation();
   }, []);
+
+  const handleRemoveOnboarding = async () => {
+    try {
+      let key = 'onBoarding';
+      let res = await removeItemValue(key);
+      if (res) {
+        console.log('Remove onBoarding Sucessfully!');
+      }
+    } catch (error) {
+      console.log('Error in removing on boarding: ', error);
+    }
+  };
 
   return (
     <>
@@ -144,6 +157,7 @@ export default function SettingScreen() {
             <SettingListCompo
               icon={require('../assets/exit.png')}
               title="Logout"
+              onPress={handleRemoveOnboarding}
             />
 
             <View style={{marginVertical: 80}} />

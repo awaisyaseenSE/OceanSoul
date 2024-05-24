@@ -5,8 +5,10 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  Dimensions,
+  Platform,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import ScreenComponent from '../components/ScreenComponent';
 import colors from '../styles/colors';
 import fontFamily from '../styles/fontFamily';
@@ -15,9 +17,13 @@ import {StackActions, useNavigation} from '@react-navigation/native';
 import navigationStrings from '../navigation/navigationStrings';
 import {storeValue} from '../helper/storeAndGetAsyncStorageValue';
 
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+
 export default function OnBoardingScreen() {
   const navigation = useNavigation();
-  const [selectedOnBoarding, setSelectedOnBoarding] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const flatListRef = useRef(null);
   const onBoardingData = [
     {
       id: 1,
@@ -40,23 +46,23 @@ export default function OnBoardingScreen() {
   ];
 
   const handleOnPressNext = () => {
-    if (selectedOnBoarding == 1) {
-      setSelectedOnBoarding(2);
-    } else if (selectedOnBoarding == 2) {
-      setSelectedOnBoarding(3);
-    } else if (selectedOnBoarding == 3) {
+    if (currentIndex == 1) {
+      setCurrentIndex(2);
+    } else if (currentIndex == 2) {
+      setCurrentIndex(3);
+    } else if (currentIndex == 3) {
       handleFinishOnBoarding();
     } else {
-      setSelectedOnBoarding(1);
+      setCurrentIndex(1);
     }
   };
   const handleOnPressPrevious = () => {
-    if (selectedOnBoarding == 2) {
-      setSelectedOnBoarding(1);
-    } else if (selectedOnBoarding == 3) {
-      setSelectedOnBoarding(2);
+    if (currentIndex == 2) {
+      setCurrentIndex(1);
+    } else if (currentIndex == 3) {
+      setCurrentIndex(2);
     } else {
-      setSelectedOnBoarding(1);
+      setCurrentIndex(1);
     }
   };
 
@@ -80,7 +86,7 @@ export default function OnBoardingScreen() {
         }}>
         <View
           style={[
-            index + 1 === selectedOnBoarding ? styles.line : styles.dot,
+            index + 1 === currentIndex ? styles.line : styles.dot,
             {
               marginHorizontal: index === 1 ? 4 : 0,
             },
@@ -89,38 +95,76 @@ export default function OnBoardingScreen() {
       </View>
     );
   };
+
+  const onViewableItemsChanged = useRef(({viewableItems}) => {
+    if (viewableItems.length > 0) {
+      setCurrentIndex(viewableItems[0].index + 1);
+    }
+  }).current;
+
+  const viewabilityConfig = {
+    itemVisiblePercentThreshold: 50,
+  };
+
+  const renderMainData = ({item, index}) => {
+    return (
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflow: 'hidden',
+          width: screenWidth,
+        }}>
+        <Image
+          source={item?.img}
+          style={{
+            width: screenWidth,
+            height: 200,
+          }}
+        />
+        <View style={{paddingHorizontal: 22, alignItems: 'center'}}>
+          <Text style={styles.heading}>{item?.title}</Text>
+          <Text
+            style={{
+              fontSize: 14,
+              color: colors.gray_dark,
+              textAlign: 'center',
+            }}>
+            {item?.desc}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <ScreenComponent style={{backgroundColor: colors.white}}>
       <View style={styles.container}>
         <OnBoardingTopCompo
-          selectedOnBoarding={selectedOnBoarding}
+          selectedOnBoarding={currentIndex}
           handleFinishOnBoarding={handleFinishOnBoarding}
         />
         <View style={styles.contentContainer}>
-          <Animated.View
-            style={{width: '100%', alignItems: 'center'}}
-            entering={FadeInDown.delay(100)
-              .duration(600)
-              .springify()
-              .damping(12)}>
-            <Image
-              source={onBoardingData[selectedOnBoarding - 1].img}
-              style={styles.image}
-            />
-          </Animated.View>
-          <Animated.Text
-            style={styles.heading}
-            entering={FadeInDown.delay(200).springify()}>
-            {onBoardingData[selectedOnBoarding - 1].title}
-          </Animated.Text>
-          <Animated.Text
-            style={styles.subHeading}
-            entering={FadeInDown.delay(300).springify()}>
-            {onBoardingData[selectedOnBoarding - 1].desc}
-          </Animated.Text>
+          <FlatList
+            ref={flatListRef}
+            data={onBoardingData}
+            renderItem={renderMainData}
+            keyExtractor={(item, index) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled
+            onViewableItemsChanged={onViewableItemsChanged}
+            viewabilityConfig={viewabilityConfig}
+          />
         </View>
-        <View style={styles.footer}>
-          {selectedOnBoarding !== 1 ? (
+        <View
+          style={[
+            styles.footer,
+            {
+              marginBottom: Platform.OS === 'android' ? 10 : 2,
+            },
+          ]}>
+          {currentIndex !== 1 ? (
             <TouchableOpacity
               onPress={handleOnPressPrevious}
               style={{width: '14%'}}
@@ -145,7 +189,7 @@ export default function OnBoardingScreen() {
           </View>
           <TouchableOpacity onPress={handleOnPressNext} activeOpacity={0.6}>
             <Text style={[styles.text, {color: colors.red}]}>
-              {selectedOnBoarding == 3 ? 'Get Started' : 'Next'}
+              {currentIndex == 3 ? 'Get Started' : 'Next'}
             </Text>
           </TouchableOpacity>
         </View>
@@ -157,7 +201,6 @@ export default function OnBoardingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
   },
   subHeading: {
     fontSize: 14,
@@ -191,13 +234,14 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
   dot: {
     width: 10,
@@ -215,7 +259,7 @@ const styles = StyleSheet.create({
 
 const OnBoardingTopCompo = ({selectedOnBoarding, handleFinishOnBoarding}) => {
   return (
-    <View style={styles.row}>
+    <View style={[styles.row, {paddingHorizontal: 20}]}>
       <Text style={styles.text}>
         {selectedOnBoarding}
         <Text style={{color: colors.gray}}>/3</Text>
