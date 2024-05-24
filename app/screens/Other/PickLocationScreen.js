@@ -58,9 +58,75 @@ export default function PickLocationScreen({route}) {
       <ScreenComponent>
         <TopCompoWithHeading title="Pick Location" />
         <View style={styles.container}>
-          <ScrollView
+          <GooglePlacesAutocomplete
+            placeholder="Start Place..."
+            onPress={(data, details = null) => {
+              console.log('Lattitude: ', details?.geometry?.location?.lat);
+              console.log('Longtitude: ', details?.geometry?.location?.lng);
+              moveToLocationStart(
+                details?.geometry?.location?.lat,
+                details?.geometry?.location?.lng,
+              );
+            }}
+            query={{
+              key: process.env.GOOGLE_MAP_API_KEY,
+              language: 'en',
+            }}
+            fetchDetails={true}
+            styles={{
+              textInputContainer: {
+                backgroundColor: colors.white_light2,
+              },
+              textInput: {
+                height: 48,
+                color: '#5d5d5d',
+                fontSize: 16,
+                backgroundColor: colors.gray2,
+              },
+              predefinedPlacesDescription: {
+                color: '#1fafef',
+              },
+            }}
+            onFail={error =>
+              console.log('error in picking start location: ', error)
+            }
+          />
+
+          <GooglePlacesAutocomplete
+            placeholder="Destination Place..."
+            onPress={(data, details = null) => {
+              let finalData = JSON.stringify(details?.geometry?.location);
+              moveToLocationDestination(
+                details?.geometry?.location?.lat,
+                details?.geometry?.location?.lng,
+              );
+            }}
+            query={{
+              key: process.env.GOOGLE_MAP_API_KEY,
+              language: 'en',
+            }}
+            fetchDetails={true}
+            styles={{
+              textInputContainer: {
+                backgroundColor: colors.white_light2,
+              },
+              textInput: {
+                height: 48,
+                color: '#5d5d5d',
+                fontSize: 16,
+                backgroundColor: colors.gray2,
+              },
+              predefinedPlacesDescription: {
+                color: '#1fafef',
+              },
+            }}
+            onFail={error => console.log(error)}
+          />
+
+          {/* <ScrollView
             style={{paddingTop: 14}}
-            showsVerticalScrollIndicator={false}>
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={false}>
             <GooglePlacesAutocomplete
               placeholder="Start Place..."
               onPress={(data, details = null) => {
@@ -90,7 +156,9 @@ export default function PickLocationScreen({route}) {
                   color: '#1fafef',
                 },
               }}
-              onFail={error => console.log(error)}
+              onFail={error =>
+                console.log('error in picking start location: ', error)
+              }
             />
 
             <View style={{marginVertical: 4}} />
@@ -125,7 +193,7 @@ export default function PickLocationScreen({route}) {
               }}
               onFail={error => console.log(error)}
             />
-          </ScrollView>
+          </ScrollView> */}
 
           {/* <View style={{flex: 1, backgroundColor: 'red'}}> */}
           <ButtonComponent textStyle={{}} title="Done" onPress={onDone} />
