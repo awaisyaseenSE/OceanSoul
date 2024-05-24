@@ -81,6 +81,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        buildConfigField "String", "GOOGLE_MAP_API_KEY", "\"${properties.getProperty("GOOGLE_MAP_API_KEY")}\""
     }
     signingConfigs {
         release {
@@ -132,3 +135,4 @@ dependencies {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'

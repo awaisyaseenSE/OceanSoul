@@ -30,6 +30,7 @@ export default function PickLocationScreen({route}) {
   const {origin, destination} = bothLocation;
 
   const onDone = () => {
+    console.log('locations: ', bothLocation);
     setLocationsFun(bothLocation);
     navigation.goBack();
   };
@@ -63,6 +64,8 @@ export default function PickLocationScreen({route}) {
             <GooglePlacesAutocomplete
               placeholder="Start Place..."
               onPress={(data, details = null) => {
+                console.log('Lattitude: ', details?.geometry?.location?.lat);
+                console.log('Longtitude: ', details?.geometry?.location?.lng);
                 moveToLocationStart(
                   details?.geometry?.location?.lat,
                   details?.geometry?.location?.lng,
